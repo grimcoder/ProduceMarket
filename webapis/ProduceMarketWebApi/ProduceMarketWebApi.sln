@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProduceMarketWebApi", "ProduceMarketWebApi\ProduceMarketWebApi.csproj", "{EC70F0AF-6B94-4FC1-9587-8831E69BDDB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProduceMarketWebApi.Tests", "ProduceMarketWebApi.Tests\ProduceMarketWebApi.Tests.csproj", "{C2459B55-97BE-4C03-82C4-9682DA0FEBDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC70F0AF-6B94-4FC1-9587-8831E69BDDB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC70F0AF-6B94-4FC1-9587-8831E69BDDB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC70F0AF-6B94-4FC1-9587-8831E69BDDB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC70F0AF-6B94-4FC1-9587-8831E69BDDB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2459B55-97BE-4C03-82C4-9682DA0FEBDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2459B55-97BE-4C03-82C4-9682DA0FEBDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2459B55-97BE-4C03-82C4-9682DA0FEBDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2459B55-97BE-4C03-82C4-9682DA0FEBDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
