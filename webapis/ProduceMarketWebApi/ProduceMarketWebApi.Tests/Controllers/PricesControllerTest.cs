@@ -7,46 +7,47 @@ using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProduceMarketWebApi;
 using ProduceMarketWebApi.Controllers;
+using ProduceMarketWebApi.Models;
 
 namespace ProduceMarketWebApi.Tests.Controllers
 {
     [TestClass]
-    public class ValuesControllerTest
+    public class PricesControllerTest
     {
         [TestMethod]
         public void Get()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            PricesController controller = new PricesController();
 
             // Act
-            IEnumerable<string> result = controller.Get();
+            IEnumerable<ItemPrice> result = controller.Get();
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
-            Assert.AreEqual("value1", result.ElementAt(0));
-            Assert.AreEqual("value2", result.ElementAt(1));
+            Assert.AreEqual(4, result.Count());
+            //Assert.AreEqual("value1", result.ElementAt(0));
+            //Assert.AreEqual("value2", result.ElementAt(1));
         }
 
         [TestMethod]
         public void GetById()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            PricesController controller = new PricesController();
 
             // Act
-            string result = controller.Get(5);
+            ItemPrice result = controller.Get(4);
 
             // Assert
-            Assert.AreEqual("value", result);
+            Assert.AreEqual(4, result.Id);
         }
 
         [TestMethod]
         public void Post()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            PricesController controller = new PricesController();
 
             // Act
             controller.Post("value");
@@ -58,7 +59,7 @@ namespace ProduceMarketWebApi.Tests.Controllers
         public void Put()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            PricesController controller = new PricesController();
 
             // Act
             controller.Put(5, "value");
@@ -70,7 +71,7 @@ namespace ProduceMarketWebApi.Tests.Controllers
         public void Delete()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            PricesController controller = new PricesController();
 
             // Act
             controller.Delete(5);
