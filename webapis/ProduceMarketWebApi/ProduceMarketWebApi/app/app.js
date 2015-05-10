@@ -1,7 +1,7 @@
 ﻿var produceMarketApp = angular.module('ProduceMarketApp', ['ProduceMarketApp.directives', 'ProduceMarketApp.services']);
 produceMarketApp.controller('MainController', function ($scope, $http) {
     $http.get('/api/prices').success(function (data, status) {
-        this.data = data;
+        $scope.data = data;
     });
 });
 

@@ -23,3 +23,5 @@ C:\src\ProduceMarket\webapis\ProduceMarketWebApi\ProduceMarketWebApi\bin\System.
 C:\src\ProduceMarket\webapis\ProduceMarketWebApi\ProduceMarketWebApi\bin\System.Web.WebPages.Razor.xml
 C:\src\ProduceMarket\webapis\ProduceMarketWebApi\ProduceMarketWebApi\obj\Debug\ProduceMarketWebApi.dll
 C:\src\ProduceMarket\webapis\ProduceMarketWebApi\ProduceMarketWebApi\obj\Debug\ProduceMarketWebApi.pdb
+C:\src\ProduceMarket\webapis\ProduceMarketWebApi\ProduceMarketWebApi\bin\Newtonsoft.Json.dll
+C:\src\ProduceMarket\webapis\ProduceMarketWebApi\ProduceMarketWebApi\bin\Newtonsoft.Json.xml
