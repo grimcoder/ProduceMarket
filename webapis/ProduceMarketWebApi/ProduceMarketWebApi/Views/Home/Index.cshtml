@@ -1,1 +1,10 @@
-﻿
+﻿<div ng-app="ProduceMarketApp">
+    <div ng-controller="MainController as mController" ng-init="mController.name='Prices Catalog';mController.data=[1,2,3,4] ">
+        <span>{{mController.name}}</span> 
+        <li ng-repeat="d in mController.data">
+            <div>Name: {{d}}</div>
+        </li>
+        <prices-List  ng-controller="PricesController as pController" ></prices-List>
+
+    </div>
+</div>
