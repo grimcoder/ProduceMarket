@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  div(ng-init="t='here we are'")
+    div {{t}}
+
+    input(type=text, ng-model='t')
+    input(type=text, ng-model='t')
