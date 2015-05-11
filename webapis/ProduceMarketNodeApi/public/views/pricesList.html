@@ -1,1 +1,16 @@
-Prices List
+
+<h3>Prices List</h3>
+<style>
+     span {width: 150px;font-size: 12pt;}
+</style>
+
+<div ng-repeat="p in prices">
+    <li>
+        <span>{{p.Id}}</span>
+        <span>{{p.Price}}</span>
+        <span>{{p.ItemName}}</span>
+
+        <span><a href="#/prices/id={{p.Id}}">edit</a></span>
+
+    </li>
+</div>
