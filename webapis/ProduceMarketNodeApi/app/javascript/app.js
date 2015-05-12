@@ -1,3 +1,5 @@
+
+
 var app = angular.module('produceMarketApp',['ngRoute']);
 
 app.controller('PricesController', function($scope){
@@ -26,7 +28,9 @@ app.controller('PriceDetailCtrl', function($scope, $routeParams, $http, $locatio
     $scope.save = function(){
         var isNew = !($scope.price && $scope.price.Id);
 
-        $http.post('/api/prices', $scope.price).success(function(data, status, headers, config){
+        $http.post('/api/prices', $scope.price)
+            .success(function(data, status, headers, config){
+
             $location.path('/');
 
 
