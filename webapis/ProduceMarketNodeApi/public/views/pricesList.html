@@ -1,7 +1,34 @@
-<h3>Prices List</h3>
 
+<style>
+    div.cell {
+        'border: 1px solid #999999;
+        float: left;
+        height: 17px;
+        overflow: hidden;
+        padding: 12px 1.8%;
+        width: 18%;}
+
+    div.cellright {
+        'border: 1px solid #999999;
+        float: left;
+        height: 17px;
+        overflow: hidden;
+        padding: 12px 1.8%;
+        width: 200px;}
+</style>
+
+<div >
+
+    <div  class="cell" style="font-size: 12pt; font-weight: bold;">Prices List <button ng-click="newPrice()">New</button></div>
+    <div class="cellright">
+        Search:
+        <input ng-model="searchkey" />
+    </div>
+
+</div>
 
 <div class="rTable">
+
     <div class="rTableRow">
         <div class="rTableHead"><strong>Id</strong></div>
         <div class="rTableHead"><span style="font-weight: bold;">Name</span></div>
@@ -9,7 +36,7 @@
         <div class="rTableHead">Edit</div>
     </div>
 
-    <div class="rTableRow" ng-repeat="p in prices">
+    <div class="rTableRow" ng-repeat="p in prices | filter: searchkey">
 
         <div class="rTableCell">{{p.Id}}</div>
         <div class="rTableCell">{{p.ItemName}}</div>
