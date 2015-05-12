@@ -1,16 +1,22 @@
-
 <h3>Prices List</h3>
-<style>
-     span {width: 150px;font-size: 12pt;}
-</style>
 
-<div ng-repeat="p in prices">
-    <li>
-        <span>{{p.Id}}</span>
-        <span>{{p.Price}}</span>
-        <span>{{p.ItemName}}</span>
 
-        <span><a href="#/prices/id={{p.Id}}">edit</a></span>
+<div class="rTable">
+    <div class="rTableRow">
+        <div class="rTableHead"><strong>Id</strong></div>
+        <div class="rTableHead"><span style="font-weight: bold;">Name</span></div>
+        <div class="rTableHead">Price</div>
+        <div class="rTableHead">Edit</div>
+    </div>
 
-    </li>
+    <div class="rTableRow" ng-repeat="p in prices">
+
+        <div class="rTableCell">{{p.Id}}</div>
+        <div class="rTableCell">{{p.ItemName}}</div>
+        <div class="rTableCell">{{p.Price}}</div>
+        <div class="rTableCell"><a href="#/prices/{{p.Id}}">edit</a></div>
+
+    </div>
+
 </div>
+

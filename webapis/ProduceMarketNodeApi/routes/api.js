@@ -1,4 +1,5 @@
 var express = require('express');
+var app = express();
 var router = express.Router();
 var prices =
     [{"Id":1,"Price":1.0,"ItemName":"Potato"},
@@ -20,4 +21,18 @@ router.get('/prices', function(req, res, next) {
         res.json(prices);}
 });
 
+
+
+router.handlePost = function(req, res){
+    var data = req.body;
+    prices = prices.filter(function(i){
+
+        return i.Id != data.Id;
+    });
+    prices.push(data);
+    res.sendStatus(200);
+    //res.json(prices);
+
+
+}
 module.exports = router;

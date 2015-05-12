@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-
+var apiUri = "http://localhost"
 
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -12,9 +12,6 @@ var users = require('./routes/users');
 var api = require('./routes/api');
 
 var app = express();
-
-
-
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -30,9 +27,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 //
+
 app.use('/', routes);
+
+
 //app.use('/users', users);
 app.use('/api', api);
+
+app.post('/api/prices', function(req, res){
+  api.handlePost(req, res);
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

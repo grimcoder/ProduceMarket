@@ -6,12 +6,17 @@
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/javascript/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
+    </link>
+
+
+
 </head>
 
 <body ng-app="produceMarketApp" ng-init="a=2">
-{{a}}
 <div ng-controller="PricesController">
-    {{text}}
+    <h2>{{Title}}</h2>
 </div>
     <div ng-view></div>
 </body>
