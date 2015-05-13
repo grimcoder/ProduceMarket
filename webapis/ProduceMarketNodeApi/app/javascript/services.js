@@ -18,7 +18,6 @@ angular.module('produceMarketApp.services', []).factory('$Prices', function($htt
 
         },
 
-
         post: function(price)
         {
             return $http.post('/api/prices', price);
@@ -39,13 +38,13 @@ angular.module('produceMarketApp.services', []).factory('$Prices', function($htt
 
         deleteSale : function(id){
             return $http.delete('/api/sales?id=' + id);
-        }
-
-            /*,
-        get: function(id){
-           return $http.get('/api/prices/?id=' + id)
-
         },
+
+
+        get: function(id){
+           return $http.get('/api/sales/?id=' + id)
+
+        }/*,,
         post: function(price)
         {
             return $http.post('/api/prices', price);

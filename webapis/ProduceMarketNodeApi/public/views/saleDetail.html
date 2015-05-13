@@ -1,30 +1,49 @@
 <h3>Price detail</h3>
 
+<style>
+    .wide {width: 300px;}
+    .narrow {width: 30px;}
+
+</style>
+
 <div class="rTableRow">
 
     <div class="rTableHead">Id</div>
-    <div class="rTableHead"><div disabled >{{price.Id}}</div>
+    <div class="rTableHead wide" >
+        <div disabled >{{sale.Id}}</div>
 
 </div>
 
 <div class="rTableRow" >
 
 
-    <div class="rTableCell">ItemName</div>
-    <div class="rTableCell"><input ng-model="price.ItemName" type="text"></div>
+    <div class="rTableCell" >Date</div>
+    <div class="rTableCell wide" ><span  type="text">{{sale.Date.toString().substr(0,10)}}</span></div>
 
 </div>
 <div class="rTableRow" >
 
-    <div class="rTableCell">Price</div>
-    <div class="rTableCell"><input ng-model="price.Price" type="text"></div>
+    <div class="rTableCell">Amount</div>
+    <div class="rTableCell wide"><span  type="text">{{priceSum(sale)}}</span></div>
 
 
 </div>
+
+
+
 <div class="rTableRow" >
 
     <div class="rTableCell"><button ng-click="save()">Save</button><button ng-click="new()">New</button></div>
-    <div class="rTableCell"></div>
+    <div class="rTableCell wide"></div>
 
 
 </div>
+    <div style="height: 50px;"></div>
+
+    <div class="rTableRow" class="rTableRow" ng-repeat="s in sale.Sales">
+        <div class="rTableCell">{{s.ItemName}}</div>
+        <div class="rTableCell">{{s.Price}}</div>
+        <div class="rTableCell">{{s.Units}}</div>
+        <div class="rTableCell narrow"><button>-</button></div>
+
+    </div>

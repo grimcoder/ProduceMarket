@@ -1,13 +1,24 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
 }
+
 input {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;}
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+}
+
+button {
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+}
+
 
 a {
   color: #000000;
 }
+
 
 .rTable {
   display: block;

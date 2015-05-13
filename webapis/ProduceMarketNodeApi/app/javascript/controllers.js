@@ -1,6 +1,9 @@
 
 app.controller('PricesController', function($scope){
     $scope.Title = 'Produce market';
+
+
+
 });
 
 app.controller('PriceListCtrl', function($scope, $location, $Prices){
@@ -63,16 +66,29 @@ app.controller('PriceDetailCtrl', function($scope, $routeParams, $location, $Pri
 app.controller('SalesCtrlDetail',
     function($scope, $routeParams, $location, $Sales)
     {
-        $scope.getSales = function(){
-            $Prices.getSales().success(function(data){
+        $scope.priceSum = function(sales){
 
-                $scope.sales = data;
-
-            });
+            return sales.Sales.reduce(function(i,n){
+                    var units = (i.Price ? i.Price * i.Units : i ) + n.Price * n.Units;
+                    return units;
+                }
+            );
         }
 
-        $scope.getSales();
+        if ($routeParams.sale){
+            $Sales.get($routeParams.sale)
+                .success(function(data) {
+                    $scope.sale = data[0];
+                }).
+                error(function(data) {
+                    $scope.sale = data[0];
+                });
+        }
+        else{
+            var a = 10;
     }
+}
+
 );
 
 app.controller('SalesCtrl',
@@ -87,13 +103,13 @@ app.controller('SalesCtrl',
         $scope.priceSum = function(sales){
             return sales.Sales.reduce(function(i,n){
                     var units = (i.Price ? i.Price * i.Units : i ) + n.Price * n.Units;
-                        return units;
-                    }
-                );
+                    return units;
+                }
+            );
         }
 
         $scope.editSale = function(id){
-
+            $location.path("/sales/" + id);
         };
 
         $scope.deleteSale = function(id){
