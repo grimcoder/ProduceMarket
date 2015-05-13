@@ -31,12 +31,15 @@ app.use('/', routes);
 app.use('/api', api);
 
 app.post('/api/prices', function(req, res){
-  api.handlePost(req, res);
+  api.handlePricePost(req, res);
 });
 
 app.delete('/api/prices', function(req, res){
+  api.handlePriceDelete(req, res);
+});
 
-  api.handleDelete(req, res);
+app.delete('/api/sales', function(req, res){
+  api.handleSaleDelete(req, res);
 });
 
 // catch 404 and forward to error handler

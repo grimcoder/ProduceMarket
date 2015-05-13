@@ -2,13 +2,30 @@ var express = require('express');
 
 var app = express();
 var router = express.Router();
+
 var prices =
         [{"Id":1,"Price":1.0,"ItemName":"Potato"},
         {"Id":2,"Price":2.0,"ItemName":"Cabbage"},
         {"Id":3,"Price":1.25,"ItemName":"Oranges"},
         {"Id":4,"Price":1.6,"ItemName":"Carrots"}];
 
-// GET /prices?id=xxx
+
+var sales = [
+    {
+        Id: 1, Date: new Date(),
+        Sales: [
+            {ItemName: 'Potato', Price: 1, Units: 2},
+            {ItemName: 'Cabbage', Price: 1, Units: 2},
+            {ItemName: 'Oranges', Price: 4, Units: 3},
+    ] },
+    {
+        Id: 2, Date: new Date(),
+        Sales: [
+            {ItemName: 'Potato', Price: 1, Units: 2},
+            {ItemName: 'Cabbage', Price: 1, Units: 3},
+            {ItemName: 'Oranges', Price: 5, Units: 2},
+    ] },
+];
 
 router.get('/prices', function(req, res, next) {
     if (req.query.id) {
@@ -21,25 +38,24 @@ router.get('/prices', function(req, res, next) {
         )
     }
     else{
-        res.json(prices);}
+        res.json(prices);
+    }
 });
 
 // DELETE /prices?id=xxx
 
-router.handleDelete = function (req, res) {
+router.handlePriceDelete = function (req, res){
 
     var id = req.query.id;
     prices = prices.filter(function(i){
         return i.Id != id;
     });
-
     res.sendStatus(200);
-
 
 };
 
 // POST /prices/
-router.handlePost = function(req, res){
+router.handlePricePost = function(req, res){
     var data = req.body;
 
     if (data.Id){
@@ -48,9 +64,11 @@ router.handlePost = function(req, res){
         });
     }
     else{
-        var maxId = prices.length == 0 ? 1 : prices.map(function(i){return i.Id}).reduce(function(previousValue, currentValue, index, array) {
-            return previousValue < currentValue ? currentValue : previousValue;
-        }) + 1;
+        var maxId = prices.length == 0 ? 1 : prices.map(function(i){return i.Id;})
+            .reduce(function(previousValue, currentValue, index, array)
+            {
+                return previousValue < currentValue ? currentValue : previousValue;
+            }) + 1;
 
         data.Id = maxId;
     }
@@ -58,6 +76,34 @@ router.handlePost = function(req, res){
     prices.push(data);
     res.sendStatus(200);
 
-}
+};
+
+router.get('/sales', function(req, res, next){
+    if (req.query.id){
+
+        res.json(sales.filter(function(i){
+            return i.Id == req.query.id;
+        }));
+    }
+
+    else{
+
+        res.json(sales);
+
+    }
+});
+
+
+router.handleSaleDelete = function (req, res){
+
+    var id = req.query.id;
+    sales = sales.filter(function(i){
+        return i.Id != id;
+    });
+    res.sendStatus(200);
+
+};
+
+
 
 module.exports = router;

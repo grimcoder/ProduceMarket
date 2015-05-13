@@ -12,6 +12,14 @@ app.config(['$routeProvider',
                 templateUrl: '/views/priceDetail.html',
                 controller: 'PriceDetailCtrl'
             }).
+            when('/sales', {
+                templateUrl: '/views/salesList.html',
+                controller: 'SalesCtrl'
+            }).
+            when('/sales/:sale', {
+                templateUrl: '/views/saleDetail.html',
+                controller: 'SalesCtrlDetail'
+            }).
             otherwise({
                 redirectTo: '/prices'
             });

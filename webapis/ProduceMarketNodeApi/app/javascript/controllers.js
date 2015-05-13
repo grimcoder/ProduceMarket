@@ -9,30 +9,27 @@ app.controller('PriceListCtrl', function($scope, $location, $Prices){
         $Prices.getPrices().success(function(data){
             $scope.prices = data;
         });
-        var a = 9;
     };
 
     $scope.deletePrice = function(id){
         $Prices.deletePrice(id).
-            success(function(data, status, headers, config){
+            success(function(data, status, headers, config) {
                 $location.path("/");
             }).
-            error(function(data, status, headers, config){
-
+            error(function(data, status, headers, config) {
             });
     };
 
     $scope.editPrice = function(id){
         $location.path("/prices/" + id);
-
     };
 
     $scope.newPrice = function(){
         $location.path('/prices/0');
-
     };
 
     $scope.getPrices();
+
 });
 
 app.controller('PriceDetailCtrl', function($scope, $routeParams, $location, $Prices){
@@ -45,7 +42,7 @@ app.controller('PriceDetailCtrl', function($scope, $routeParams, $location, $Pri
         //$Prices.counter++;
         var isNew = !($scope.price && $scope.price.Id);
         $Prices.post($scope.price).success(function(data, status, headers, config){
-            $location.path('/');
+            $location.path("/");
         })
     };
 
@@ -62,3 +59,49 @@ app.controller('PriceDetailCtrl', function($scope, $routeParams, $location, $Pri
         var a = 10;
     }
 });
+
+app.controller('SalesCtrlDetail',
+    function($scope, $routeParams, $location, $Sales)
+    {
+        $scope.getSales = function(){
+            $Prices.getSales().success(function(data){
+
+                $scope.sales = data;
+
+            });
+        }
+
+        $scope.getSales();
+    }
+);
+
+app.controller('SalesCtrl',
+    function($scope, $routeParams, $location, $Sales, $route)
+    {
+        $scope.getSales = function(){
+            $Sales.getSales().success(function(data){
+                $scope.sales = data;
+            });
+        };
+
+        $scope.priceSum = function(sales){
+            return sales.Sales.reduce(function(i,n){
+                    var units = (i.Price ? i.Price * i.Units : i ) + n.Price * n.Units;
+                        return units;
+                    }
+                );
+        }
+
+        $scope.editSale = function(id){
+
+        };
+
+        $scope.deleteSale = function(id){
+            $Sales.deleteSale(id).success(function(data){
+                $route.reload();
+            });
+        };
+
+        $scope.getSales();
+    }
+);
