@@ -16,8 +16,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,14 +28,16 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 
 app.use('/', routes);
 
-
-//app.use('/users', users);
 app.use('/api', api);
 
 app.post('/api/prices', function(req, res){
   api.handlePost(req, res);
 });
 
+app.delete('/api/prices', function(req, res){
+
+  api.handleDelete(req, res);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

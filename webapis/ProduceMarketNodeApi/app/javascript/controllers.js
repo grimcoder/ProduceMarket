@@ -14,10 +14,25 @@ app.controller('PriceListCtrl', function($scope, $http, $location){
             });
     };
 
+    $scope.deletePrice = function(id){
+        $http.delete('/api/prices?id=' + id).
+            success(function(data, status, headers, config) {
+                $location.path("/");
+            }).
+            error(function(data, status, headers, config) {
+            });
+    };
+
+    $scope.editPrice = function(id){
+        $location.path("/prices/" + id);
+
+    };
+
     $scope.newPrice = function(){
         $location.path('/prices/0');
 
     };
+
     $scope.getPrices($http);
 });
 

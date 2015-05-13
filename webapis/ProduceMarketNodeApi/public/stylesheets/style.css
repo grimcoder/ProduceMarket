@@ -4,7 +4,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #000000;
 }
 
 .rTable {
@@ -24,7 +24,15 @@ a {
   height: 17px;
   overflow: hidden;
   padding: 3px 1.8%;
-  width: 18%;
+  width: 100px;
+}
+.rButtonCell {
+  border: 1px solid #999999;
+  float: left;
+  overflow: hidden;
+  padding: 3px;
+
+  width: 50px;
 }
 .rTable:after {
   visibility: hidden;

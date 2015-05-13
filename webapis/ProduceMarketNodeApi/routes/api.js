@@ -8,6 +8,8 @@ var prices =
         {"Id":3,"Price":1.25,"ItemName":"Oranges"},
         {"Id":4,"Price":1.6,"ItemName":"Carrots"}];
 
+// GET /prices?id=xxx
+
 router.get('/prices', function(req, res, next) {
     if (req.query.id) {
         res.json(
@@ -22,8 +24,21 @@ router.get('/prices', function(req, res, next) {
         res.json(prices);}
 });
 
+// DELETE /prices?id=xxx
+
+router.handleDelete = function (req, res) {
+
+    var id = req.query.id;
+    prices = prices.filter(function(i){
+        return i.Id != id;
+    });
+
+    res.sendStatus(200);
 
 
+};
+
+// POST /prices/
 router.handlePost = function(req, res){
     var data = req.body;
 
@@ -33,7 +48,7 @@ router.handlePost = function(req, res){
         });
     }
     else{
-        var maxId = prices.map(function(i){return i.Id}).reduce(function(previousValue, currentValue, index, array) {
+        var maxId = prices.length == 0 ? 1 : prices.map(function(i){return i.Id}).reduce(function(previousValue, currentValue, index, array) {
             return previousValue < currentValue ? currentValue : previousValue;
         }) + 1;
 
@@ -42,8 +57,7 @@ router.handlePost = function(req, res){
 
     prices.push(data);
     res.sendStatus(200);
-    //res.json(prices);
-
 
 }
+
 module.exports = router;
