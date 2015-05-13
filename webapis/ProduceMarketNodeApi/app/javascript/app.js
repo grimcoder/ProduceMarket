@@ -1,4 +1,4 @@
-var app = angular.module('produceMarketApp',['ngRoute']);
+var app = angular.module('produceMarketApp',['ngRoute', 'produceMarketApp.services']);
 
 
 app.config(['$routeProvider',
