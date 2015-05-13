@@ -1,3 +1,3 @@
-/**
- * Created by taraskovtun on 5/11/15.
- */
+angular.module('myApp.services', []) .factory('githubService', function() {
+    var serviceInstance = {}; // Our first service return serviceInstance;
+});
