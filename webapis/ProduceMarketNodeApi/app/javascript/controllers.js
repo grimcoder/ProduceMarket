@@ -64,15 +64,34 @@ app.controller('PriceDetailCtrl', function($scope, $routeParams, $location, $Pri
 });
 
 app.controller('SalesCtrlDetail',
-    function($scope, $routeParams, $location, $Sales)
+    function($scope, $routeParams, $location, $Sales, $Prices)
     {
-        $scope.priceSum = function(sales){
 
-            return sales.Sales.reduce(function(i,n){
-                    var units = (i.Price ? i.Price * i.Units : i ) + n.Price * n.Units;
-                    return units;
-                }
-            );
+        $scope.priceSum = function(sale){
+            return $Sales.priceSum(sale);
+        }
+
+        $Prices.getPrices().success(function(data){
+            $scope.prices = data;
+        });
+
+        $scope.save = function(sale){
+            $Sales.updateSale(sale).success(function(){
+
+                $route.reload();
+            });
+        }
+
+        $scope.removeSaleDetail = function(sd){
+            $scope.sale.SaleDetails = $scope.sale.SaleDetails.filter(function(i){
+                return sd != i;
+            });
+
+        }
+
+        $scope.addSaleDetail = function(){
+            $scope.sale.SaleDetails.push({});
+
         }
 
         if ($routeParams.sale){
@@ -80,14 +99,14 @@ app.controller('SalesCtrlDetail',
                 .success(function(data) {
                     $scope.sale = data[0];
                 }).
-                error(function(data) {
+                error(function(data){
                     $scope.sale = data[0];
                 });
         }
         else{
             var a = 10;
+        }
     }
-}
 
 );
 
@@ -100,12 +119,8 @@ app.controller('SalesCtrl',
             });
         };
 
-        $scope.priceSum = function(sales){
-            return sales.Sales.reduce(function(i,n){
-                    var units = (i.Price ? i.Price * i.Units : i ) + n.Price * n.Units;
-                    return units;
-                }
-            );
+        $scope.priceSum = function(sale){
+            return $Sales.priceSum(sale);
         }
 
         $scope.editSale = function(id){

@@ -24,23 +24,31 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
-//
 
-app.use('/', routes);
+{ // region routing and web services handlers.
 
-app.use('/api', api);
+  app.use('/', routes);
 
-app.post('/api/prices', function(req, res){
-  api.handlePricePost(req, res);
-});
+  app.use('/api', api);
 
-app.delete('/api/prices', function(req, res){
-  api.handlePriceDelete(req, res);
-});
+  app.post('/api/prices', function (req, res) {
+    api.handlePricePost(req, res);
+  });
 
-app.delete('/api/sales', function(req, res){
-  api.handleSaleDelete(req, res);
-});
+  app.delete('/api/prices', function (req, res) {
+    api.handlePriceDelete(req, res);
+  });
+
+  app.delete('/api/sales', function (req, res) {
+    api.handleSaleDelete(req, res);
+  });
+
+  app.post('/api/sales', function (req, res) {
+    api.handleSaleUpdate(req, res);
+  });
+
+}
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

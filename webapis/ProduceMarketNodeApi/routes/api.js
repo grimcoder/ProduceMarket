@@ -13,17 +13,18 @@ var prices =
 var sales = [
     {
         Id: 1, Date: new Date(),
-        Sales: [
+        SaleDetails: [
             {ItemName: 'Potato', Price: 1, Units: 2},
             {ItemName: 'Cabbage', Price: 1, Units: 2},
             {ItemName: 'Oranges', Price: 4, Units: 3},
     ] },
     {
         Id: 2, Date: new Date(),
-        Sales: [
+        SaleDetails: [
             {ItemName: 'Potato', Price: 1, Units: 2},
             {ItemName: 'Cabbage', Price: 1, Units: 3},
             {ItemName: 'Oranges', Price: 5, Units: 2},
+            {ItemName: 'Carrots', Price: 2.4, Units: 2},
     ] },
 ];
 
@@ -100,6 +101,23 @@ router.handleSaleDelete = function (req, res){
     sales = sales.filter(function(i){
         return i.Id != id;
     });
+    res.sendStatus(200);
+
+};
+
+
+
+router.handleSaleUpdate = function (req, res){
+
+    var sale = req.body;
+
+    sales = sales.filter(function(i){
+
+        return i.Id != sale.Id;
+
+    });
+    sales.push(sale);
+
     res.sendStatus(200);
 
 };

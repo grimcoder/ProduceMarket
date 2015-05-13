@@ -33,17 +33,47 @@
 
 <div class="rTableRow" >
 
-    <div class="rTableCell"><button ng-click="save()">Save</button><button ng-click="new()">New</button></div>
+    <div class="rTableCell"><button ng-click="save(sale)">Save</button><button ng-click="new()">New</button></div>
     <div class="rTableCell wide"></div>
 
 
 </div>
     <div style="height: 50px;"></div>
 
-    <div class="rTableRow" class="rTableRow" ng-repeat="s in sale.Sales">
-        <div class="rTableCell">{{s.ItemName}}</div>
-        <div class="rTableCell">{{s.Price}}</div>
-        <div class="rTableCell">{{s.Units}}</div>
-        <div class="rTableCell narrow"><button>-</button></div>
+    <div class="rTableRow" class="rTableRow" ng-repeat="s in sale.SaleDetails">
+
+
+        <div class="rTableCell" ng-show="!s.ItemName">
+                <select ng-model="s.ItemName"
+
+                        ng-options="item.ItemName as item.ItemName for item in prices">
+                </select>
+        </div>
+
+        <div class="rTableCell" ng-show="s.ItemName">
+            {{s.ItemName}}
+        </div>
+
+
+        <div  ng-show="s.Price" class="rTableCell">{{s.Price}}</div>
+
+        <div  ng-show="!s.Price" class="rTableCell">
+            <input ng-model-options="{ updateOn: 'blur'}"  ng-model="s.Price" />
+        </div>
+
+        <div  ng-show="s.Units" class="rTableCell">{{s.Units}}</div>
+        <div  ng-show="!s.Units" class="rTableCell">
+            <input ng-model="s.Units" ng-model-options="{ updateOn: 'blur'}"  ></div>
+
+        <div class="rTableCell narrow">
+            <button ng-click="removeSaleDetail(s)">-</button>
+        </div>
 
     </div>
+
+<div class="rTableRow" style="height: 20px;"></div>
+
+    <div class="rTableRow" style="height: 100px;">
+    <button ng-click="addSaleDetail()">+</button>
+
+</div>

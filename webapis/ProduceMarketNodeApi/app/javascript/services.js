@@ -32,12 +32,32 @@ angular.module('produceMarketApp.services', []).factory('$Prices', function($htt
     var serviceInstance = {
 
         counter: 0,
+
+        priceSum : function(sale){
+        if (!sale || !sale.SaleDetails || sale.SaleDetails.length == 0) return 0;
+
+
+        return sale.SaleDetails.map(
+            function(i){
+                if (!i.Price || !i.Units) return 0;
+                return i.Price * i.Units;
+            }).reduce(function(i,n){
+                return i+n;
+            });
+        },
+
+
         getSales: function(){
             return $http.get('/api/sales');
         },
 
         deleteSale : function(id){
             return $http.delete('/api/sales?id=' + id);
+        },
+
+
+        updateSale : function(sale){
+            return $http.post('/api/sales', sale);
         },
 
 
