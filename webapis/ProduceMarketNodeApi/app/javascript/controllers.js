@@ -42,7 +42,6 @@ app.controller('PriceDetailCtrl', function($scope, $routeParams, $location, $Pri
     };
 
     $scope.save = function(){
-        //$Prices.counter++;
         var isNew = !($scope.price && $scope.price.Id);
         $Prices.post($scope.price).success(function(data, status, headers, config){
             $location.path("/");
@@ -64,7 +63,7 @@ app.controller('PriceDetailCtrl', function($scope, $routeParams, $location, $Pri
 });
 
 app.controller('SalesCtrlDetail',
-    function($scope, $routeParams, $location, $Sales, $Prices)
+    function($scope, $routeParams, $location, $Sales, $Prices, $route)
     {
 
         $scope.priceSum = function(sale){
@@ -75,26 +74,39 @@ app.controller('SalesCtrlDetail',
             $scope.prices = data;
         });
 
-        $scope.save = function(sale){
-            $Sales.updateSale(sale).success(function(){
+        var getPriceByName = function(pName){
 
+            var item = $scope.prices.filter(function(p){
+                return p.ItemName == pName;
+            })[0];
+
+            return item.Price;
+
+        }
+
+        $scope.save = function(sale){
+            $Sales.updateSale(sale).success(function()
+            {
                 $route.reload();
             });
+        }
+
+        $scope.updatePrice = function(sale){
+            sale.Price = getPriceByName(sale.ItemName);
         }
 
         $scope.removeSaleDetail = function(sd){
             $scope.sale.SaleDetails = $scope.sale.SaleDetails.filter(function(i){
                 return sd != i;
             });
-
         }
 
         $scope.addSaleDetail = function(){
             $scope.sale.SaleDetails.push({});
-
         }
 
-        if ($routeParams.sale){
+        if ($routeParams.sale && $routeParams.sale != 0)
+        {
             $Sales.get($routeParams.sale)
                 .success(function(data) {
                     $scope.sale = data[0];
@@ -104,7 +116,9 @@ app.controller('SalesCtrlDetail',
                 });
         }
         else{
-            var a = 10;
+            $scope.sale ={
+                Date : new Date(), SaleDetails : []
+            };
         }
     }
 
@@ -118,6 +132,13 @@ app.controller('SalesCtrl',
                 $scope.sales = data;
             });
         };
+
+
+        $scope.newSale = function(){
+            $location.path("/sales/0");
+
+        }
+
 
         $scope.priceSum = function(sale){
             return $Sales.priceSum(sale);

@@ -5,7 +5,7 @@ body {
 }
 
 input {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  'font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 
 }
 
@@ -14,7 +14,7 @@ button {
 
 }
 
-input {width: 30px;
+input {width: 80px;
   height: 11px;}
 
 

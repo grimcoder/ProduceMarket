@@ -17,7 +17,7 @@ var sales = [
             {ItemName: 'Potato', Price: 1, Units: 2},
             {ItemName: 'Cabbage', Price: 1, Units: 2},
             {ItemName: 'Oranges', Price: 4, Units: 3},
-    ] },
+    ]},
     {
         Id: 2, Date: new Date(),
         SaleDetails: [
@@ -25,7 +25,7 @@ var sales = [
             {ItemName: 'Cabbage', Price: 1, Units: 3},
             {ItemName: 'Oranges', Price: 5, Units: 2},
             {ItemName: 'Carrots', Price: 2.4, Units: 2},
-    ] },
+    ]},
 ];
 
 router.get('/prices', function(req, res, next) {
@@ -110,6 +110,15 @@ router.handleSaleDelete = function (req, res){
 router.handleSaleUpdate = function (req, res){
 
     var sale = req.body;
+    if (!sale.Id){
+        var maxId = sales.length == 0 ? 1 : sales.map(function(i){return i.Id;})
+            .reduce(function(previousValue, currentValue, index, array)
+            {
+                return previousValue < currentValue ? currentValue : previousValue;
+            }) + 1;
+
+        sale.Id = maxId;
+    }
 
     sales = sales.filter(function(i){
 

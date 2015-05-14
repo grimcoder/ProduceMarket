@@ -33,7 +33,9 @@
 
 <div class="rTableRow" >
 
-    <div class="rTableCell"><button ng-click="save(sale)">Save</button><button ng-click="new()">New</button></div>
+    <div class="rTableCell">
+        <button ng-click="save(sale)">Save</button>
+    </div>
     <div class="rTableCell wide"></div>
 
 
@@ -44,8 +46,7 @@
 
 
         <div class="rTableCell" ng-show="!s.ItemName">
-                <select ng-model="s.ItemName"
-
+                <select ng-model="s.ItemName" ng-change="updatePrice(s)"
                         ng-options="item.ItemName as item.ItemName for item in prices">
                 </select>
         </div>
