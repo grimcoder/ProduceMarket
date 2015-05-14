@@ -32,7 +32,6 @@ app.controller('PriceListCtrl', function($scope, $location, $Prices){
     };
 
     $scope.getPrices();
-
 });
 
 app.controller('PriceDetailCtrl', function($scope, $routeParams, $location, $Prices){
@@ -121,7 +120,6 @@ app.controller('SalesCtrlDetail',
             };
         }
     }
-
 );
 
 app.controller('SalesCtrl',
@@ -157,3 +155,24 @@ app.controller('SalesCtrl',
         $scope.getSales();
     }
 );
+
+app.controller('IncomeCtrlDetail', function($scope, $routeParams, $location, $Sales, $route)
+{
+
+});
+
+
+
+app.controller('IncomeCtrl', function($scope, $routeParams, $location, $Sales, $route)
+{
+
+
+
+});
+
+app.controller('ReportsCtrl', function($scope, $routeParams, $location, $Sales, $route)
+{
+
+
+
+});

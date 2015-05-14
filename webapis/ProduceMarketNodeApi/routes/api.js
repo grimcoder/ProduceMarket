@@ -25,7 +25,26 @@ var sales = [
             {ItemName: 'Cabbage', Price: 1, Units: 3},
             {ItemName: 'Oranges', Price: 5, Units: 2},
             {ItemName: 'Carrots', Price: 2.4, Units: 2},
+    ]}
+];
+
+
+var incomes = [
+    {
+        Id: 1, Date: new Date(),
+        SaleDetails: [
+            {ItemName: 'Potato', Price: 1, Units: 2},
+            {ItemName: 'Cabbage', Price: 1, Units: 2},
+            {ItemName: 'Oranges', Price: 4, Units: 3},
     ]},
+    {
+        Id: 2, Date: new Date(),
+        SaleDetails: [
+            {ItemName: 'Potato', Price: 1, Units: 2},
+            {ItemName: 'Cabbage', Price: 1, Units: 3},
+            {ItemName: 'Oranges', Price: 5, Units: 2},
+            {ItemName: 'Carrots', Price: 2.4, Units: 2},
+    ]}
 ];
 
 router.get('/prices', function(req, res, next) {
@@ -83,6 +102,22 @@ router.get('/sales', function(req, res, next){
     if (req.query.id){
 
         res.json(sales.filter(function(i){
+            return i.Id == req.query.id;
+        }));
+    }
+
+    else{
+
+        res.json(sales);
+
+    }
+});
+
+
+router.get('/incomes', function(req, res, next){
+    if (req.query.id)
+    {
+        res.json(incomes.filter(function(i){
             return i.Id == req.query.id;
         }));
     }
