@@ -1,1 +1,65 @@
-income list
+
+<style>
+    div.cell {
+    'border: 1px solid #999999;
+    float: left;
+        height: 17px;
+        overflow: hidden;
+        padding: 12px 1.8%;
+        width: 40%;
+    }
+
+    div.cellright {
+    'border: 1px solid #999999;
+    float: left;
+        height: 17px;
+        overflow: hidden;
+        padding: 12px 1.8%;
+        width: 40%;}
+</style>
+
+<div>
+
+    <div  class="cell" style="font-size: 12pt; font-weight: bold;">Income
+        <button ng-click="newIncome()">New</button>
+    </div>
+
+    <div class="cellright">
+        Search:
+        <input ng-model="searchkey" />
+    </div>
+
+</div>
+
+<div class="rTable">
+
+    <div class="rTableRow">
+        <div class="rTableHead"><strong>Id</strong></div>
+        <div class="rTableHead"><span style="font-weight: bold;">Date</span></div>
+        <div class="rTableHead">Sum</div>
+        <div class="rTableHead rButtonCell">Edit</div>
+        <div class="rTableHead rButtonCell">Delete</div>
+    </div>
+
+    <div class="rTableRow" ng-repeat="i in incomes | filter: searchkey">
+
+        <div class="rTableCell">{{i.Id}}</div>
+        <div class="rTableCell" >{{i.Date.toString().substr(0,10)}}</div>
+        <div class="rTableCell">{{priceSum(i)}}</div>
+
+        <div class="rTableCell rButtonCell">
+
+            <button ng-click="editIncome(i.Id);">edit</button>
+
+        </div>
+
+        <div class="rTableCell rButtonCell">
+            <button ng-click="deleteSale(i.Id);">delete</button>
+        </div>
+
+
+    </div>
+
+</div>
+
+

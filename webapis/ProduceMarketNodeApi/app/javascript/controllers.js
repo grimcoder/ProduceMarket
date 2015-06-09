@@ -1,9 +1,6 @@
 
 app.controller('PricesController', function($scope){
     $scope.Title = 'Produce market';
-
-
-
 });
 
 app.controller('PriceListCtrl', function($scope, $location, $Prices){
@@ -16,10 +13,10 @@ app.controller('PriceListCtrl', function($scope, $location, $Prices){
 
     $scope.deletePrice = function(id){
         $Prices.deletePrice(id).
-            success(function(data, status, headers, config) {
+            success(function(data, status, headers, config){
                 $location.path("/");
             }).
-            error(function(data, status, headers, config) {
+            error(function(data, status, headers, config){
             });
     };
 
@@ -64,7 +61,6 @@ app.controller('PriceDetailCtrl', function($scope, $routeParams, $location, $Pri
 app.controller('SalesCtrlDetail',
     function($scope, $routeParams, $location, $Sales, $Prices, $route)
     {
-
         $scope.priceSum = function(sale){
             return $Sales.priceSum(sale);
         }
@@ -74,13 +70,10 @@ app.controller('SalesCtrlDetail',
         });
 
         var getPriceByName = function(pName){
-
             var item = $scope.prices.filter(function(p){
                 return p.ItemName == pName;
             })[0];
-
             return item.Price;
-
         }
 
         $scope.save = function(sale){
@@ -115,7 +108,7 @@ app.controller('SalesCtrlDetail',
                 });
         }
         else{
-            $scope.sale ={
+            $scope.sale = {
                 Date : new Date(), SaleDetails : []
             };
         }
@@ -130,13 +123,10 @@ app.controller('SalesCtrl',
                 $scope.sales = data;
             });
         };
-
-
         $scope.newSale = function(){
             $location.path("/sales/0");
 
         }
-
 
         $scope.priceSum = function(sale){
             return $Sales.priceSum(sale);
@@ -156,23 +146,7 @@ app.controller('SalesCtrl',
     }
 );
 
-app.controller('IncomeCtrlDetail', function($scope, $routeParams, $location, $Sales, $route)
-{
-
-});
-
-
-
-app.controller('IncomeCtrl', function($scope, $routeParams, $location, $Sales, $route)
-{
-
-
-
-});
-
 app.controller('ReportsCtrl', function($scope, $routeParams, $location, $Sales, $route)
 {
-
-
 
 });

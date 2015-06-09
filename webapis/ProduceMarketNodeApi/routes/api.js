@@ -124,7 +124,7 @@ router.get('/incomes', function(req, res, next){
 
     else{
 
-        res.json(sales);
+        res.json(incomes);
 
     }
 });
