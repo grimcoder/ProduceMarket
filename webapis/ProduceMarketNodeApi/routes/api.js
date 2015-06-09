@@ -12,14 +12,14 @@ var prices =
 
 var sales = [
     {
-        Id: 1, Date: new Date(),
+        Id: 1, Date: new Date(2015, 1, 1, 0, 0, 0, 0),
         SaleDetails: [
             {ItemName: 'Potato', Price: 1, Units: 2},
             {ItemName: 'Cabbage', Price: 1, Units: 2},
             {ItemName: 'Oranges', Price: 4, Units: 3},
     ]},
     {
-        Id: 2, Date: new Date(),
+        Id: 2, Date: new Date(2015, 3, 2, 0, 0, 0, 0),
         SaleDetails: [
             {ItemName: 'Potato', Price: 1, Units: 2},
             {ItemName: 'Cabbage', Price: 1, Units: 3},
