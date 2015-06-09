@@ -1,17 +1,18 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
 
+div {
+  background-color: white;
 }
 
 input {
   'font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-
 }
 
 button {
   font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
-
 }
 
 input {width: 80px;
