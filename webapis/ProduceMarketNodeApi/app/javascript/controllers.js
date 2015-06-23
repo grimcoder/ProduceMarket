@@ -122,25 +122,29 @@ app.controller('SalesCtrl',
             $location.path("/sales/0");
 
         };
-
         $scope.priceSum = function (sale) {
             return $Sales.priceSum(sale);
         };
-
         $scope.editSale = function (id) {
             $location.path("/sales/" + id);
         };
-
         $scope.deleteSale = function (id) {
             $Sales.deleteSale(id).success(function (data) {
                 $route.reload();
             });
         };
-
         $scope.getSales();
     }
 );
 
-app.controller('ReportsCtrl', function ($scope, $routeParams, $location, $Sales, $route) {
+app.controller('ReportPricesCtrl', function ($scope, $routeParams, $location, $Reports, $route) {
+    $scope.getPricesHistory = function () {
+
+        $Reports.getPricesReport().success(function (data) {
+            $scope.prices = data;
+        });
+    };
+
+    $scope.getPricesHistory();
 
 });

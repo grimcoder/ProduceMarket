@@ -19,7 +19,15 @@ angular.module('produceMarketApp.services', []).factory('$Prices', function ($ht
     };
     return serviceInstance;
 
-}).factory('$Sales', function ($http) {
+}).factory('$Reports', function ($http) {
+    var serviceInstance = {
+        getPricesReport: function () {
+            return $http.get('/api/reports/prices');
+        }
+    };
+    return serviceInstance;
+})
+    .factory('$Sales', function ($http) {
 
     var serviceInstance = {
 

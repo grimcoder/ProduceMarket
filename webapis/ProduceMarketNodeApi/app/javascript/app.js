@@ -23,7 +23,7 @@ app.config(['$routeProvider',
 
             when('/reports/prices', {
                 templateUrl: '/views/reportPrices.html',
-                controller: 'ReportsCtrl'
+                controller: 'ReportPricesCtrl'
             }).
 
             otherwise({

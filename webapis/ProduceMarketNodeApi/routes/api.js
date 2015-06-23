@@ -162,6 +162,11 @@ router.get('/incomes', function (req, res, next) {
     }
 });
 
+router.get('/reports/prices',
+    function (req, res) {
+        res.json(priceChanges);
+    });
+
 
 router.handleSaleDelete = function (req, res) {
 
