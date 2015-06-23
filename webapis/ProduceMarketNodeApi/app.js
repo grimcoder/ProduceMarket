@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var apiUri = "http://localhost"
+var apiUri = "http://localhost";
 
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -19,6 +19,7 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app')));
@@ -27,20 +28,27 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 { // region routing and web services handlers.
 
   app.use('/', routes);
+
   app.use('/api', api);
+
   app.post('/api/prices', function (req, res) {
     api.handlePricePost(req, res);
   });
+
   app.delete('/api/prices', function (req, res) {
     api.handlePriceDelete(req, res);
   });
+
   app.delete('/api/sales', function (req, res) {
     api.handleSaleDelete(req, res);
   });
+
   app.post('/api/sales', function (req, res) {
     api.handleSaleUpdate(req, res);
   });
+
 }
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
