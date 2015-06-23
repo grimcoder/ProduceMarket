@@ -20,10 +20,12 @@ app.config(['$routeProvider',
                 templateUrl: '/views/saleDetail.html',
                 controller: 'SalesCtrlDetail'
             }).
-            when('/reports', {
-                templateUrl: '/views/reports.html',
+
+            when('/reports/prices', {
+                templateUrl: '/views/reportPrices.html',
                 controller: 'ReportsCtrl'
             }).
+
             otherwise({
                 redirectTo: '/prices'
             });

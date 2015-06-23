@@ -4,11 +4,18 @@ var app = express();
 var router = express.Router();
 
 var prices =
-        [{"Id":1,"Price":1.0,"ItemName":"Potato"},
-        {"Id":2,"Price":2.0,"ItemName":"Cabbage"},
-        {"Id":3,"Price":1.25,"ItemName":"Oranges"},
-        {"Id":4,"Price":1.6,"ItemName":"Carrots"}];
+    [{"Id": 1, "Price": 1.0, "ItemName": "Potato"},
+        {"Id": 2, "Price": 2.0, "ItemName": "Cabbage"},
+        {"Id": 3, "Price": 1.25, "ItemName": "Oranges"},
+        {"Id": 4, "Price": 1.6, "ItemName": "Carrots"}];
 
+var priceChanges = [
+
+    //        {"Id":1,"Price":1.0,"PriceWas":2.0,"ItemName":"Potato", "Action": "Change"},
+    //        {"Id":1,"Price":1.0, "ItemName":"Potato", "Action": "New"},
+    //        {"Id":1,"PriceWas":2.0,"ItemName":"Potato", "Action": "Delete"},
+
+];
 
 var sales = [
     {
@@ -17,7 +24,8 @@ var sales = [
             {ItemName: 'Potato', Price: 1, Units: 2},
             {ItemName: 'Cabbage', Price: 1, Units: 2},
             {ItemName: 'Oranges', Price: 4, Units: 3},
-    ]},
+        ]
+    },
     {
         Id: 2, Date: new Date(2015, 3, 2, 0, 0, 0, 0),
         SaleDetails: [
@@ -25,7 +33,8 @@ var sales = [
             {ItemName: 'Cabbage', Price: 1, Units: 3},
             {ItemName: 'Oranges', Price: 5, Units: 2},
             {ItemName: 'Carrots', Price: 2.4, Units: 2},
-    ]}
+        ]
+    }
 ];
 
 
@@ -36,7 +45,8 @@ var incomes = [
             {ItemName: 'Potato', Price: 1, Units: 2},
             {ItemName: 'Cabbage', Price: 1, Units: 2},
             {ItemName: 'Oranges', Price: 4, Units: 3},
-    ]},
+        ]
+    },
     {
         Id: 2, Date: new Date(),
         SaleDetails: [
@@ -44,49 +54,70 @@ var incomes = [
             {ItemName: 'Cabbage', Price: 1, Units: 3},
             {ItemName: 'Oranges', Price: 5, Units: 2},
             {ItemName: 'Carrots', Price: 2.4, Units: 2},
-    ]}
+        ]
+    }
 ];
 
-router.get('/prices', function(req, res, next) {
+router.get('/prices', function (req, res, next) {
     if (req.query.id) {
         res.json(
             prices.filter(
-                function(i)
-                {
-                    return i.Id==req.query.id;
+                function (i) {
+                    return i.Id == req.query.id;
                 })
         )
     }
-    else{
+    else {
         res.json(prices);
     }
 });
 
 // DELETE /prices?id=xxx
 
-router.handlePriceDelete = function (req, res){
+router.handlePriceDelete = function (req, res) {
 
     var id = req.query.id;
-    prices = prices.filter(function(i){
+    var priceToDelete = prices.filter(function (i) {
+        return i.Id == id;
+    })[0];
+
+    priceToDelete.Action = 'Delete';
+    priceChanges.push(priceToDelete);
+
+
+    prices = prices.filter(function (i) {
         return i.Id != id;
     });
-    res.sendStatus(200);
 
+    res.sendStatus(200);
 };
 
-// POST /prices/
-router.handlePricePost = function(req, res){
-    var data = req.body;
 
-    if (data.Id){
-        prices = prices.filter(function(i){
-            return i.Id != data.Id;
-        });
+// POST /prices/
+router.handlePricePost = function (req, res) {
+    var data = req.body;
+    var Action;
+    var priceWas;
+    if (data.Id) {
+        Action = "Edit";
+
+        priceWas = prices.filter(
+            function (i) {
+                return i.Id == data.Id;
+            })[0].Price;
+
+        prices = prices.filter(
+            function (i) {
+                return i.Id != data.Id;
+            });
     }
-    else{
-        var maxId = prices.length == 0 ? 1 : prices.map(function(i){return i.Id;})
-            .reduce(function(previousValue, currentValue, index, array)
-            {
+
+    else {
+        Action = "New";
+        var maxId = prices.length == 0 ? 1 : prices.map(function (i) {
+            return i.Id;
+        })
+            .reduce(function (previousValue, currentValue, index, array) {
                 return previousValue < currentValue ? currentValue : previousValue;
             }) + 1;
 
@@ -94,19 +125,22 @@ router.handlePricePost = function(req, res){
     }
 
     prices.push(data);
+    data.Action = Action;
+    data.priceWas = priceWas;
+    priceChanges.push(data);
     res.sendStatus(200);
 
 };
 
-router.get('/sales', function(req, res, next){
-    if (req.query.id){
+router.get('/sales', function (req, res, next) {
+    if (req.query.id) {
 
-        res.json(sales.filter(function(i){
+        res.json(sales.filter(function (i) {
             return i.Id == req.query.id;
         }));
     }
 
-    else{
+    else {
 
         res.json(sales);
 
@@ -114,15 +148,14 @@ router.get('/sales', function(req, res, next){
 });
 
 
-router.get('/incomes', function(req, res, next){
-    if (req.query.id)
-    {
-        res.json(incomes.filter(function(i){
+router.get('/incomes', function (req, res, next) {
+    if (req.query.id) {
+        res.json(incomes.filter(function (i) {
             return i.Id == req.query.id;
         }));
     }
 
-    else{
+    else {
 
         res.json(incomes);
 
@@ -130,10 +163,10 @@ router.get('/incomes', function(req, res, next){
 });
 
 
-router.handleSaleDelete = function (req, res){
+router.handleSaleDelete = function (req, res) {
 
     var id = req.query.id;
-    sales = sales.filter(function(i){
+    sales = sales.filter(function (i) {
         return i.Id != id;
     });
     res.sendStatus(200);
@@ -141,21 +174,21 @@ router.handleSaleDelete = function (req, res){
 };
 
 
-
-router.handleSaleUpdate = function (req, res){
+router.handleSaleUpdate = function (req, res) {
 
     var sale = req.body;
-    if (!sale.Id){
-        var maxId = sales.length == 0 ? 1 : sales.map(function(i){return i.Id;})
-            .reduce(function(previousValue, currentValue, index, array)
-            {
+    if (!sale.Id) {
+        var maxId = sales.length == 0 ? 1 : sales.map(function (i) {
+            return i.Id;
+        })
+            .reduce(function (previousValue, currentValue, index, array) {
                 return previousValue < currentValue ? currentValue : previousValue;
             }) + 1;
 
         sale.Id = maxId;
     }
 
-    sales = sales.filter(function(i){
+    sales = sales.filter(function (i) {
 
         return i.Id != sale.Id;
 
@@ -165,7 +198,6 @@ router.handleSaleUpdate = function (req, res){
     res.sendStatus(200);
 
 };
-
 
 
 module.exports = router;

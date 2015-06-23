@@ -1,0 +1,68 @@
+<style>
+    div.cell {
+    'border: 1px solid #999999; float : left;
+        height: 17px;
+        overflow: hidden;
+        padding: 12px 1.8%;
+        width: 40%;
+    }
+
+    div.cellright {
+    'border: 1px solid #999999; float : left;
+        height: 17px;
+        overflow: hidden;
+        padding: 12px 1.8%;
+        width: 40%;
+    }
+</style>
+
+<div>
+
+    <div class="cell" style="font-size: 12pt; font-weight: bold;">
+        Prices history.
+        <button ng-click="newPrice()">New</button>
+    </div>
+
+    <div class="cellright">
+        Search:
+        <input ng-model="searchkey"/>
+    </div>
+
+
+</div>
+
+<div class="rTable">
+
+    <div class="rTableRow">
+        <div class="rTableHead"><strong>Id</strong></div>
+        <div class="rTableHead"><span style="font-weight: bold;">Name</span></div>
+        <div class="rTableHead">Price</div>
+        <div class="rTableHead">Price was</div>
+        <div class="rTableHead">Action</div>
+    </div>
+
+    <div class="rTableRow" ng-repeat="p in prices | filter: searchkey">
+
+        <div class="rTableCell">{{p.Id}}</div>
+        <div class="rTableCell">{{p.ItemName}}</div>
+        <div class="rTableCell">{{p.Price}}</div>
+        <div class="rTableCell">{{p.PriceWas}}</div>
+        <div class="rTableCell">{{p.Action}}</div>
+
+        <!--<div class="rTableCell rButtonCell">-->
+
+        <!--&lt;!&ndash;<a href="#/prices/{{p.Id}}">edit</a>&ndash;&gt;-->
+        <!--<button ng-click="editPrice(p.Id);">edit</button>-->
+
+        <!--</div>-->
+
+        <!--<div class="rTableCell rButtonCell">-->
+        <!--<button ng-click="deletePrice(p.Id);">delete</button>-->
+        <!--</div>-->
+
+
+    </div>
+
+</div>
+
+
