@@ -1,62 +1,35 @@
+var saveToFile = function (obj, filenam) {
+    var fs = require('fs');
+
+    fs.writeFile(process.cwd() + '\\' + filenam, JSON.stringify(obj), function (err) {
+
+        if (err) {
+            return console.log(err);
+        }
+
+        console.log("The file was saved!");
+    });
+};
+
+var readFromFile = function (filenam) {
+    var fs = require('fs');
+
+    var str = fs.readFileSync(process.cwd() + '\\' + filenam + ".json", 'utf8');
+    var obj = JSON.parse(str);
+    return obj;
+
+};
+
+
 var express = require('express');
 
 var app = express();
+
 var router = express.Router();
 
-var prices =
-    [{"Id": 1, "Price": 1.0, "ItemName": "Potato"},
-        {"Id": 2, "Price": 2.0, "ItemName": "Cabbage"},
-        {"Id": 3, "Price": 1.25, "ItemName": "Oranges"},
-        {"Id": 4, "Price": 1.6, "ItemName": "Carrots"}];
-
-var priceChanges = [
-
-    //        {"Id":1,"Price":1.0,"PriceWas":2.0,"ItemName":"Potato", "Action": "Change"},
-    //        {"Id":1,"Price":1.0, "ItemName":"Potato", "Action": "New"},
-    //        {"Id":1,"PriceWas":2.0,"ItemName":"Potato", "Action": "Delete"},
-
-];
-
-var sales = [
-    {
-        Id: 1, Date: new Date(2015, 1, 1, 0, 0, 0, 0),
-        SaleDetails: [
-            {ItemName: 'Potato', Price: 1, Units: 2},
-            {ItemName: 'Cabbage', Price: 1, Units: 2},
-            {ItemName: 'Oranges', Price: 4, Units: 3},
-        ]
-    },
-    {
-        Id: 2, Date: new Date(2015, 3, 2, 0, 0, 0, 0),
-        SaleDetails: [
-            {ItemName: 'Potato', Price: 1, Units: 2},
-            {ItemName: 'Cabbage', Price: 1, Units: 3},
-            {ItemName: 'Oranges', Price: 5, Units: 2},
-            {ItemName: 'Carrots', Price: 2.4, Units: 2},
-        ]
-    }
-];
-
-
-var incomes = [
-    {
-        Id: 1, Date: new Date(),
-        SaleDetails: [
-            {ItemName: 'Potato', Price: 1, Units: 2},
-            {ItemName: 'Cabbage', Price: 1, Units: 2},
-            {ItemName: 'Oranges', Price: 4, Units: 3},
-        ]
-    },
-    {
-        Id: 2, Date: new Date(),
-        SaleDetails: [
-            {ItemName: 'Potato', Price: 1, Units: 2},
-            {ItemName: 'Cabbage', Price: 1, Units: 3},
-            {ItemName: 'Oranges', Price: 5, Units: 2},
-            {ItemName: 'Carrots', Price: 2.4, Units: 2},
-        ]
-    }
-];
+var prices = readFromFile("prices");
+var sales = readFromFile("sales");
+var priceChanges = readFromFile("priceChanges");
 
 router.get('/prices', function (req, res, next) {
     if (req.query.id) {
@@ -88,6 +61,8 @@ router.handlePriceDelete = function (req, res) {
     prices = prices.filter(function (i) {
         return i.Id != id;
     });
+    saveToFile(prices, "prices.json");
+    saveToFile(priceChanges, "priceChanges.json");
 
     res.sendStatus(200);
 };
@@ -128,6 +103,8 @@ router.handlePricePost = function (req, res) {
     data.Action = Action;
     data.priceWas = priceWas;
     priceChanges.push(data);
+    saveToFile(prices, "prices.json");
+    saveToFile(priceChanges, "priceChanges.json");
     res.sendStatus(200);
 
 };
@@ -174,6 +151,7 @@ router.handleSaleDelete = function (req, res) {
     sales = sales.filter(function (i) {
         return i.Id != id;
     });
+    saveToFile(sales, "sales.json");
     res.sendStatus(200);
 
 };
@@ -199,7 +177,7 @@ router.handleSaleUpdate = function (req, res) {
 
     });
     sales.push(sale);
-
+    saveToFile(sales, "sales.json");
     res.sendStatus(200);
 
 };

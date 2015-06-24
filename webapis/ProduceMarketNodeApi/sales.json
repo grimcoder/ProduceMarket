@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 2,
+    "Date": "2015-04-02T07:00:00.000Z",
+    "SaleDetails": [
+      {
+        "ItemName": "Potato",
+        "Price": 1,
+        "Units": 2
+      },
+      {
+        "ItemName": "Cabbage",
+        "Price": 1,
+        "Units": 3
+      },
+      {
+        "ItemName": "Oranges",
+        "Price": 5,
+        "Units": 2
+      },
+      {
+        "ItemName": "Carrots",
+        "Price": 2.4,
+        "Units": 2
+      }
+    ]
+  },
+  {
+    "Id": 1,
+    "Date": "2015-02-01T08:00:00.000Z",
+    "SaleDetails": [
+      {
+        "ItemName": "Potato",
+        "Price": 1,
+        "Units": 2
+      },
+      {
+        "ItemName": "Cabbage",
+        "Price": 1,
+        "Units": 2
+      }
+    ]
+  }
+]

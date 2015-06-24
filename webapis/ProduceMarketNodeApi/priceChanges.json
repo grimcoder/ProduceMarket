@@ -1,0 +1,9 @@
+[
+  {
+    "Id": 1,
+    "Price": "2",
+    "ItemName": "Potato",
+    "Action": "Edit",
+    "priceWas": 1
+  }
+]
