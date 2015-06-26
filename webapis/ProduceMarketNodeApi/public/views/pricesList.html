@@ -22,7 +22,7 @@
 
     <div  class="cell" style="font-size: 12pt; font-weight: bold;">
         Prices List
-        <button ng-click="newPrice()">New</button>
+        <li class="button" ng-click="newPrice()">New</li>
     </div>
 
     <div class="cellright">
@@ -51,12 +51,12 @@
         <div class="rTableCell rButtonCell">
 
             <!--<a href="#/prices/{{p.Id}}">edit</a>-->
-            <button ng-click="editPrice(p.Id);">edit</button>
+            <li class="button" ng-click="editPrice(p.Id);">edit</li>
 
         </div>
 
         <div class="rTableCell rButtonCell">
-            <button ng-click="deletePrice(p.Id);">delete</button>
+            <li class="button" ng-click="deletePrice(p.Id);">delete</li>
         </div>
 
 
