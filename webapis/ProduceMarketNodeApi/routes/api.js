@@ -1,7 +1,10 @@
-var saveToFile = function (obj, filenam) {
-    var fs = require('fs');
+var path = require('path');
+var fs = require('fs');
 
-    fs.writeFile(process.cwd() + '\\' + filenam, JSON.stringify(obj), function (err) {
+var saveToFile = function (obj, filenam) {
+
+
+    fs.writeFile(path.join(__dirname, '../data/', filenam), JSON.stringify(obj), function (err) {
 
         if (err) {
             return console.log(err);
@@ -12,9 +15,7 @@ var saveToFile = function (obj, filenam) {
 };
 
 var readFromFile = function (filenam) {
-    var fs = require('fs');
-
-    var str = fs.readFileSync(process.cwd() + '\\' + filenam + ".json", 'utf8');
+    var str = fs.readFileSync(path.join(__dirname, '../data/', filenam) + ".json", 'utf8');
     var obj = JSON.parse(str);
     return obj;
 
