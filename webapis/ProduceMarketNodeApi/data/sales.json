@@ -26,19 +26,24 @@
     ]
   },
   {
-    "Id": 1,
-    "Date": "2015-02-01T08:00:00.000Z",
+    "Date": "2015-06-24T22:22:33.875Z",
     "SaleDetails": [
       {
-        "ItemName": "Potato",
-        "Price": 1,
-        "Units": 2
+        "ItemName": "Cabbage",
+        "Price": 2,
+        "Units": "8"
       },
       {
-        "ItemName": "Cabbage",
-        "Price": 1,
-        "Units": 2
+        "ItemName": "Leek",
+        "Price": "3.5",
+        "Units": "7"
+      },
+      {
+        "ItemName": "Carrots",
+        "Price": 1.6,
+        "Units": "9"
       }
-    ]
+    ],
+    "Id": 3
   }
 ]
