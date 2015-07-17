@@ -1,39 +1,24 @@
 [
   {
+    "Id": 2,
+    "Price": 2,
+    "ItemName": "Cabbage"
+  },
+  {
+    "Id": 3,
+    "Price": 1.25,
+    "ItemName": "Oranges"
+  },
+  {
     "Id": 4,
     "Price": 1.6,
     "ItemName": "Carrots"
   },
   {
-    "ItemName": "Eggplant",
-    "Price": "5",
-    "Id": 5,
-    "Action": "New"
-  },
-  {
-    "ItemName": "Leek",
-    "Price": "3.5",
-    "Id": 6,
-    "Action": "New"
-  },
-  {
-    "ItemName": "dd",
-    "Price": "1",
-    "Id": 7,
-    "Action": "New"
-  },
-  {
-    "Id": 2,
-    "Price": "22",
-    "ItemName": "Cabbage",
+    "Id": 1,
+    "Price": "2",
+    "ItemName": "Potato",
     "Action": "Edit",
-    "priceWas": 2
-  },
-  {
-    "Id": 3,
-    "Price": "1.256",
-    "ItemName": "Oranges",
-    "Action": "Edit",
-    "priceWas": 1.25
+    "priceWas": 1
   }
 ]

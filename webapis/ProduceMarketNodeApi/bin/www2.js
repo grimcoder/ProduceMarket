@@ -1,11 +1,3 @@
-/**
- * Created by taraskovtun on 7/16/15.
- */
-var express = require('express'),
-    mongoskin = require('mongoskin'),
-    bodyParser = require('body-parser'),
-    logger = require('morgan');
-
 var path = require('path');
 var fs = require('fs');
 
@@ -17,35 +9,20 @@ var saveToFile = function (obj, filenam) {
         console.log("The file was saved!");
     });
 };
-
 var readFromFile = function (filenam) {
     var str = fs.readFileSync(path.join(__dirname, '../data/', filenam) + ".json", 'utf8');
     var obj = JSON.parse(str);
     return obj;
-
 };
 
+var express = require('express');
+var app = express();
+var router = express.Router();
 var prices = readFromFile("prices");
 var sales = readFromFile("sales");
 var priceChanges = readFromFile("priceChanges");
 
-var app = express();
-
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
-app.use(logger());
-
-
-app.use(express.static(path.join(__dirname, '../public')));
-app.use(express.static(path.join(__dirname, '../app')));
-app.use(express.static(path.join(__dirname, '../bower_components')));
-
-
-app.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
-});
-
-app.get('/api/prices', function (req, res) {
+router.get('/prices', function (req, res, next) {
     if (req.query.id) {
         res.json(
             prices.filter(
@@ -59,13 +36,35 @@ app.get('/api/prices', function (req, res) {
     }
 });
 
-app.post('/api/prices', function (req, res) {
+// DELETE /prices?id=xxx
+router.handlePriceDelete = function (req, res) {
 
+    var id = req.query.id;
+    var priceToDelete = prices.filter(function (i) {
+        return i.Id == id;
+    })[0];
+
+    priceToDelete.Action = 'Delete';
+    priceChanges.push(priceToDelete);
+
+
+    prices = prices.filter(function (i) {
+        return i.Id != id;
+    });
+    saveToFile(prices, "prices.json");
+    saveToFile(priceChanges, "priceChanges.json");
+
+    res.sendStatus(200);
+};
+
+// POST /prices/
+router.handlePricePost = function (req, res) {
     var data = req.body;
     var Action;
     var priceWas;
     if (data.Id) {
         Action = "Edit";
+
         priceWas = prices.filter(
             function (i) {
                 return i.Id == data.Id;
@@ -85,6 +84,7 @@ app.post('/api/prices', function (req, res) {
             .reduce(function (previousValue, currentValue, index, array) {
                 return previousValue < currentValue ? currentValue : previousValue;
             }) + 1;
+
         data.Id = maxId;
     }
 
@@ -96,29 +96,42 @@ app.post('/api/prices', function (req, res) {
     saveToFile(priceChanges, "priceChanges.json");
     res.sendStatus(200);
 
+};
+
+router.get('/sales', function (req, res, next) {
+    if (req.query.id) {
+
+        res.json(sales.filter(function (i) {
+            return i.Id == req.query.id;
+        }));
+    }
+
+    else {
+
+        res.json(sales);
+
+    }
 });
 
-app.delete('/api/prices', function (req, res) {
+router.get('/incomes', function (req, res, next) {
+    if (req.query.id) {
+        res.json(incomes.filter(function (i) {
+            return i.Id == req.query.id;
+        }));
+    }
 
-    var id = req.query.id;
-    var priceToDelete = prices.filter(function (i) {
-        return i.Id == id;
-    })[0];
+    else {
 
-    priceToDelete.Action = 'Delete';
-    priceChanges.push(priceToDelete);
+        res.json(incomes);
 
+    }
+});
 
-    prices = prices.filter(function (i) {
-        return i.Id != id;
+router.get('/reports/prices', function (req, res) {
+        res.json(priceChanges);
     });
-    saveToFile(prices, "prices.json");
-    saveToFile(priceChanges, "priceChanges.json");
 
-    res.sendStatus(200);
-});
-
-app.delete('/api/sales', function (req, res) {
+router.handleSaleDelete = function (req, res) {
 
     var id = req.query.id;
     sales = sales.filter(function (i) {
@@ -127,9 +140,9 @@ app.delete('/api/sales', function (req, res) {
     saveToFile(sales, "sales.json");
     res.sendStatus(200);
 
-});
+};
 
-app.post('/api/sales', function (req, res) {
+router.handleSaleUpdate = function (req, res) {
 
     var sale = req.body;
     if (!sale.Id) {
@@ -152,29 +165,6 @@ app.post('/api/sales', function (req, res) {
     saveToFile(sales, "sales.json");
     res.sendStatus(200);
 
-});
+};
 
-app.get('/api/sales', function (req, res) {
-    if (req.query.id) {
-
-        res.json(sales.filter(function (i) {
-            return i.Id == req.query.id;
-        }));
-    }
-
-    else {
-
-        res.json(sales);
-
-    }
-});
-
-app.get('/api/reports/prices', function (req, res) {
-    res.json(priceChanges);
-});
-
-
-app.listen(3000, function () {
-    console.log('Server is running')
-});
-
+module.exports = router;
