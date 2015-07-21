@@ -5,5 +5,11 @@
     "ItemName": "Potato",
     "Action": "Edit",
     "priceWas": 1
+  },
+  {
+    "Id": 2,
+    "Price": 2,
+    "ItemName": "Cabbage",
+    "Action": "Delete"
   }
 ]

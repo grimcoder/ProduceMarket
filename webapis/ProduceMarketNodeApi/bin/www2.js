@@ -35,11 +35,9 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(logger());
 
-
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../app')));
 app.use(express.static(path.join(__dirname, '../bower_components')));
-
 
 app.get('/', function (req, res, next) {
     res.render('index', {title: 'Express'});
@@ -108,11 +106,12 @@ app.delete('/api/prices', function (req, res) {
     priceToDelete.Action = 'Delete';
     priceChanges.push(priceToDelete);
 
-
     prices = prices.filter(function (i) {
         return i.Id != id;
     });
+
     saveToFile(prices, "prices.json");
+
     saveToFile(priceChanges, "priceChanges.json");
 
     res.sendStatus(200);
@@ -165,8 +164,6 @@ app.get('/api/reports/prices', function (req, res) {
     res.json(priceChanges);
 });
 
-
 app.listen(3000, function () {
     console.log('Server is running')
 });
-

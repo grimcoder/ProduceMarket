@@ -15,35 +15,17 @@
 
 <body ng-app="produceMarketApp" ng-init="a=2">
 <div  ng-controller="PricesController">
-    <li class="button" onclick="window.history.back();"> back</li>
-
+    <button onclick="window.history.back();">back</button>
     <h2>{{Title}}</h2>
 </div>
 
 <div style="height: 5px; border: 1px; background: darkolivegreen"></div>
-<div style="height: 50px; border: 1px; background: none; padding: 5px;">
-    <ul>
-        <li><a href="#/prices/">Prices</a></li>
-        <li><a href="#/sales/">Sales</a></li>
-        <li>
-            Reports
-            <ul>
-                <li>
-                    <a href="#/reports/prices">Reports</a>
-                </li>
-                <li>
-                    <a href="#/reports/prices">Reports</a>
-                </li>
-                <li>
-                    <a href="#/reports/prices">Reports</a>
-                </li>
+<div style="height: 20px; border: 1px; background: none; padding: 5px;">
 
+    <a href="#/prices/">Prices</a>
+    <a href="#/sales/">Sales</a>
+    <a href="#/reports/prices">Reports</a>
 
-            </ul>
-        </li>
-
-
-    </ul>
 </div>
 <div style="height: 5px; border: 1px; background: darkolivegreen"></div>
     <div ng-view></div>
