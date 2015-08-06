@@ -1,13 +1,17 @@
 /**
  * Created by taraskovtun on 7/16/15.
  */
+
 var express = require('express'),
     mongoskin = require('mongoskin'),
     bodyParser = require('body-parser'),
-    logger = require('morgan');
+    logger = require('morgan'),
+    path = require('path'),
+    fs = require('fs'),
+    argv = require('optimist').argv,
+    useMongo = argv.m ? true : false
 
-var path = require('path');
-var fs = require('fs');
+console.log('Using mongo: ' + useMongo);
 
 var saveToFile = function (obj, filenam) {
     fs.writeFile(path.join(__dirname, '../data/', filenam), JSON.stringify(obj), function (err) {
@@ -22,12 +26,15 @@ var readFromFile = function (filenam) {
     var str = fs.readFileSync(path.join(__dirname, '../data/', filenam) + ".json", 'utf8');
     var obj = JSON.parse(str);
     return obj;
-
 };
 
 var prices = readFromFile("prices");
 var sales = readFromFile("sales");
 var priceChanges = readFromFile("priceChanges");
+
+if (useMongo){
+
+}
 
 var app = express();
 

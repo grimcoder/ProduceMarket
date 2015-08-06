@@ -6,3 +6,5 @@ To run Angular.js + node.js after checkout.
 1. cd webapis\ProduceMarketNodeApi (for unit/linux/mac use cd webapis\ProduceMarketNodeApi)
 2. npm install
 3. node bin\www2.js
+or if you are planning to use mongo
+node bin\www2.js -m
