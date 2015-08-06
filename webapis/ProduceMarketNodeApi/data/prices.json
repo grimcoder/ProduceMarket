@@ -1,17 +1,1 @@
-[
-  {
-    "Id": 3,
-    "Price": 1.25,
-    "ItemName": "Oranges"
-  },
-  {
-    "Id": 4,
-    "Price": 1.6,
-    "ItemName": "Carrots"
-  },
-  {
-    "Id": 1,
-    "Price": "2",
-    "ItemName": "Potato"
-  }
-]
+[{"Id":3,"Price":1.25,"ItemName":"Oranges"},{"Id":1,"Price":"2","ItemName":"Potato"},{"ItemName":"Guava","Price":"6","Id":4,"Action":"Edit","priceWas":"3"},{"ItemName":"PopCorn","Price":"4.5","Id":5,"Action":"New"}]
