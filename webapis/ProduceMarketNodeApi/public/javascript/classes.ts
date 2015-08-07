@@ -13,15 +13,5 @@ module ProduceMarket {
             this.Price = price
         }
     }
-    export class Price {
-        Id:number;
-        Price:number;
-        ItemName:string;
 
-        constructor(id:number, price:number, itemname:string) {
-            this.Id = id;
-            this.ItemName = itemname;
-            this.Price = price
-        }
-    }
 }

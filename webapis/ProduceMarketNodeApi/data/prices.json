@@ -1,1 +1,17 @@
-[{"Id":3,"Price":1.25,"ItemName":"Oranges"},{"Id":1,"Price":"2","ItemName":"Potato"},{"ItemName":"Guava","Price":"6","Id":4,"Action":"Edit","priceWas":"3"},{"ItemName":"PopCorn","Price":"4.5","Id":5,"Action":"New"}]
+[
+  {
+    "ItemName": "Guava",
+    "Price": "6",
+    "Id": 4
+  },
+  {
+    "ItemName": "PopCorn",
+    "Price": "4.5",
+    "Id": 5
+  },
+  {
+    "Id": 1,
+    "Price": "23",
+    "ItemName": "Potato"
+  }
+]

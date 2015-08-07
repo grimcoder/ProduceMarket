@@ -20,14 +20,11 @@ app.config(['$routeProvider',
                 templateUrl: '/views/saleDetail.html',
                 controller: 'SalesCtrlDetail'
             }).
-
             when('/reports/prices', {
                 templateUrl: '/views/reportPrices.html',
                 controller: 'ReportPricesCtrl'
             }).
-
             otherwise({
                 redirectTo: '/prices'
             });
-
     }]);

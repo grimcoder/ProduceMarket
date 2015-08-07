@@ -1,1 +1,13 @@
-[{"Id":2,"Date":"2015-04-02T07:00:00.000Z","SaleDetails":[{"ItemName":"Potato","Price":1,"Units":2},{"ItemName":"Cabbage","Price":1,"Units":3},{"ItemName":"Oranges","Price":5,"Units":2},{"ItemName":"Carrots","Price":2.4,"Units":2}]},{"Date":"2015-06-24T22:22:33.875Z","SaleDetails":[{"ItemName":"Cabbage","Price":2,"Units":"8"},{"ItemName":"Leek","Price":"3.5","Units":"7"},{"ItemName":"Carrots","Price":1.6,"Units":"9"}],"Id":3},{"Date":"2015-08-06T23:35:52.941Z","SaleDetails":[{"ItemName":"Oranges","Price":1.25,"Units":"4"},{"ItemName":"PopCorn","Price":"4.5","Units":"5"},{"ItemName":"Guava","Price":"6","Units":"2"}],"Id":4}]
+[
+  {
+    "Date": "2015-06-24T22:22:33.875Z",
+    "SaleDetails": [
+      {
+        "ItemName": "Carrots",
+        "Price": 1.6,
+        "Units": "9"
+      }
+    ],
+    "Id": 3
+  }
+]
