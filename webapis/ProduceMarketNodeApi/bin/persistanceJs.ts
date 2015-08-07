@@ -1,5 +1,6 @@
 ///<reference path="definitions/nodejs.d.ts" />
-var DB = function () {
+
+var DB =  ()=> {
     var path = require('path'), utilities = require('./utils'), fs = require('fs');
     var utils = utilities();
     var prices = utils.readFromFile("prices");
@@ -9,20 +10,20 @@ var DB = function () {
         'prices': prices,
         'sales': sales,
         'priceChanges': priceChanges,
-        'pricesfilter': function (id) {
-            return prices.filter(function (i) {
+        'pricesfilter':  (id)=> {
+            return prices.filter( (i)=> {
                 return i.Id == id;
             });
         },
-        'postprice': function (data) {
+        'postprice':  (data) =>{
             var Action;
             var priceWas;
             if (data.Id) {
                 Action = "Edit";
-                priceWas = db.prices.filter(function (i) {
+                priceWas = db.prices.filter((i) => {
                     return i.Id == data.Id;
                 })[0].Price;
-                db.prices = db.prices.filter(function (i) {
+                db.prices = db.prices.filter((i) => {
                     return i.Id != data.Id;
                 });
             }
@@ -30,7 +31,7 @@ var DB = function () {
                 Action = "New";
                 var maxId = db.prices.length == 0 ? 1 : db.prices.map(function (i) {
                     return i.Id;
-                }).reduce(function (previousValue, currentValue) {
+                }).reduce( (previousValue, currentValue)=> {
                     return previousValue < currentValue ? currentValue : previousValue;
                 }) + 1;
                 data.Id = maxId;
@@ -43,41 +44,41 @@ var DB = function () {
             utils.saveToFile(db.prices, "prices.json");
             utils.saveToFile(db.priceChanges, "priceChanges.json");
         },
-        'pricetodelete': function (Id) {
-            var priceToDelete = db.prices.filter(function (i) {
+        'pricetodelete':  (Id)=> {
+            var priceToDelete = db.prices.filter( (i)=> {
                 return Id == i.Id;
             })[0];
             priceToDelete.Action = 'Delete';
             db.priceChanges.push(priceToDelete);
-            db.prices = db.prices.filter(function (i) {
+            db.prices = db.prices.filter( (i)=> {
                 return i.Id != Id;
             });
             utils.saveToFile(db.prices, "prices.json");
             utils.saveToFile(db.priceChanges, "priceChanges.json");
         },
-        'salestodelete': function (id) {
-            db.sales = db.sales.filter(function (i) {
+        'salestodelete':  (id)=> {
+            db.sales = db.sales.filter( (i)=> {
                 return i.Id != id;
             });
             utils.saveToFile(db.sales, "sales.json");
         },
-        'postsale': function (sale) {
+        'postsale':  (sale)=> {
             if (!sale.Id) {
                 var maxId = db.sales.length == 0 ? 1 : db.sales.map(function (i) {
                     return i.Id;
-                }).reduce(function (previousValue, currentValue) {
+                }).reduce( (previousValue, currentValue) => {
                     return previousValue < currentValue ? currentValue : previousValue;
                 }) + 1;
                 sale.Id = maxId;
             }
-            db.sales = db.sales.filter(function (i) {
+            db.sales = db.sales.filter( (i)=> {
                 return i.Id != sale.Id;
             });
             db.sales.push(sale);
             utils.saveToFile(db.sales, "sales.json");
         },
-        salesfilter: function (id) {
-            return db.sales.filter(function (i) {
+        salesfilter:  (id)=> {
+            return db.sales.filter( (i)=> {
                 return i.Id == id;
             });
         }
@@ -85,5 +86,4 @@ var DB = function () {
     return db;
 };
 module.exports = DB;
-//# sourceMappingURL=persistanceJs.js.map 
 //# sourceMappingURL=persistanceJs.js.map

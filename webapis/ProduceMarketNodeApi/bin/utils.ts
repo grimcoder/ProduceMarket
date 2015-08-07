@@ -1,4 +1,5 @@
 ///<reference path="definitions/nodejs.d.ts" />
+
 var path = require('path'), fs = require('fs');
 var Utils = function () {
     var Utils = {
@@ -22,5 +23,4 @@ var Utils = function () {
     return Utils;
 };
 module.exports = Utils;
-//# sourceMappingURL=utils.js.map 
 //# sourceMappingURL=utils.js.map
