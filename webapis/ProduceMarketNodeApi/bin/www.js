@@ -64,6 +64,30 @@ app.get('/api/sales', function (req, res) {
 app.get('/api/reports/prices', function (req, res) {
     res.json(db.priceChanges);
 });
+app.get('/api/trucks', function (req, res) {
+    var mongoose = require('mongoose');
+    mongoose.connect('mongodb://localhost/test');
+    var Schema = mongoose.Schema;
+    var carSchema = new Schema({ make: String, Color: String, model: String });
+    carSchema.virtual('id').get(function () {
+        return this._id.toHexString();
+    });
+    // Ensure virtual fields are serialised.
+    carSchema.set('toJSON', {
+        virtuals: true
+    });
+    // Ensure virtual fields are serialised.
+    carSchema.set('toObject', {
+        virtuals: true
+    });
+    var Truck = mongoose.model('Truck', carSchema);
+    var trucks;
+    var query = Truck.find(function (err, trks) {
+        trucks = trks;
+        console.log(trucks);
+        res.json(trucks);
+    });
+});
 app.listen(3000, function () {
     console.log('Server is running');
 });
