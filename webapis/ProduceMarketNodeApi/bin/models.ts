@@ -16,7 +16,7 @@ var Price = new Schema({
 
 var Sale = new Schema({
     Date : Date,
-    SaleDetails : [      {
+    SaleDetails : [{
         "ItemName": String,
         "Price": Number,
         "Units": Number
@@ -28,8 +28,8 @@ var PriceChange = new Schema({
 
 })
 
+var PriceModel = mongoose.model('Price', Price )
+
 module.exports = {
-    Price: mongoose.model('Price', Price),
-    Sale: mongoose.model('Sale', Price),
-    PriceChange: mongoose.model('PriceChange', PriceChange)
+    Price: PriceModel
 }

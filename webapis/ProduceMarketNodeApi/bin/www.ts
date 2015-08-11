@@ -15,10 +15,11 @@ var express = require('express'),
 
 //when run with -i switch init mongo db and exit
 if (initMongo) {
-    require('./initMongo')();
+    require('./initMongo')(
+        process.exit
+)};
     //noinspection JSUnusedAssignment
-    process.exit()
-}
+
 
 //if running script with -m switch use Mongo otherwise use file storage
 if (useMongo) {

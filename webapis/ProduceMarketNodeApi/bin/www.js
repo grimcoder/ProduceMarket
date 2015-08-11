@@ -6,10 +6,10 @@
 var express = require('express'), bodyParser = require('body-parser'), logger = require('morgan'), argv = require('optimist').argv, useMongo = argv.m ? true : false, initMongo = argv.i ? true : false, path = require('path'), utils = require('./utils')();
 //when run with -i switch init mongo db and exit
 if (initMongo) {
-    require('./initMongo')();
-    //noinspection JSUnusedAssignment
-    process.exit();
+    require('./initMongo')(process.exit);
 }
+;
+//noinspection JSUnusedAssignment
 //if running script with -m switch use Mongo otherwise use file storage
 if (useMongo) {
     var DB = require('./persistanceMongo')();

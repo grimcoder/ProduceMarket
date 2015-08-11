@@ -17,9 +17,8 @@ var Sale = new Schema({
     }]
 });
 var PriceChange = new Schema({});
+var PriceModel = mongoose.model('Price', Price);
 module.exports = {
-    Price: mongoose.model('Price', Price),
-    Sale: mongoose.model('Sale', Price),
-    PriceChange: mongoose.model('PriceChange', PriceChange)
+    Price: PriceModel
 };
 //# sourceMappingURL=models.js.map
