@@ -15,12 +15,8 @@ var express = require('express'),
 
 //when run with -i switch init mongo db and exit
 if (initMongo) {
-    require('./initMongo')(
-        process.exit
-)};
-    //noinspection JSUnusedAssignment
-
-
+    require('./initMongo')(process.exit)
+}
 //if running script with -m switch use Mongo otherwise use file storage
 if (useMongo) {
     var DB = require('./persistanceMongo')();
@@ -48,7 +44,7 @@ app.get('/api/prices', (req, res) => {
         )
     }
     else {
-        res.json(db.prices);
+        res.json(db.prices());
     }
 });
 
@@ -83,12 +79,12 @@ app.get('/api/sales', (req, res) => {
         res.json(db.salesfilter(req.query.id))
     }
     else {
-        res.json(db.sales);
+        res.json(db.sales());
     }
 });
 
 app.get('/api/reports/prices', (req, res) => {
-    res.json(db.priceChanges);
+    res.json(db.priceChanges());
 });
 
 app.get('/api/trucks', (req, res) => {
@@ -99,19 +95,7 @@ app.get('/api/trucks', (req, res) => {
 
     var carSchema = new Schema({make : String,Color: String,model: String});
 
-    carSchema.virtual('id').get(function(){
-        return this._id.toHexString();
-    });
 
-// Ensure virtual fields are serialised.
-    carSchema.set('toJSON', {
-        virtuals: true
-    });
-
-// Ensure virtual fields are serialised.
-    carSchema.set('toObject', {
-        virtuals: true
-    });
 
     var Truck = mongoose.model('Truck', carSchema);
     var trucks;

@@ -1,6 +1,10 @@
 ///<reference path="definitions/nodejs.d.ts" />
 var DB = function () {
-    var db = {};
+    var db = {
+        'prices': function () {
+            return [];
+        }
+    };
     return db;
 };
 module.exports = DB;

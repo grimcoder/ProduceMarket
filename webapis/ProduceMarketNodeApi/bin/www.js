@@ -8,8 +8,6 @@ var express = require('express'), bodyParser = require('body-parser'), logger = 
 if (initMongo) {
     require('./initMongo')(process.exit);
 }
-;
-//noinspection JSUnusedAssignment
 //if running script with -m switch use Mongo otherwise use file storage
 if (useMongo) {
     var DB = require('./persistanceMongo')();
@@ -30,7 +28,7 @@ app.get('/api/prices', function (req, res) {
         res.json(db.pricesfilter(req.query.id));
     }
     else {
-        res.json(db.prices);
+        res.json(db.prices());
     }
 });
 app.post('/api/prices', function (req, res) {
@@ -58,28 +56,17 @@ app.get('/api/sales', function (req, res) {
         res.json(db.salesfilter(req.query.id));
     }
     else {
-        res.json(db.sales);
+        res.json(db.sales());
     }
 });
 app.get('/api/reports/prices', function (req, res) {
-    res.json(db.priceChanges);
+    res.json(db.priceChanges());
 });
 app.get('/api/trucks', function (req, res) {
     var mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/test');
     var Schema = mongoose.Schema;
     var carSchema = new Schema({ make: String, Color: String, model: String });
-    carSchema.virtual('id').get(function () {
-        return this._id.toHexString();
-    });
-    // Ensure virtual fields are serialised.
-    carSchema.set('toJSON', {
-        virtuals: true
-    });
-    // Ensure virtual fields are serialised.
-    carSchema.set('toObject', {
-        virtuals: true
-    });
     var Truck = mongoose.model('Truck', carSchema);
     var trucks;
     var query = Truck.find(function (err, trks) {

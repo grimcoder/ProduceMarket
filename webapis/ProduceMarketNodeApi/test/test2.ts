@@ -1,4 +1,6 @@
-import chai = require('chai');
+///<reference path="../bin/definitions/nodejs.d.ts" />
+///<reference path="../bin/definitions/mongoose.d.ts" />
+var chai = require('chai');
 
 /**
  * Globals
