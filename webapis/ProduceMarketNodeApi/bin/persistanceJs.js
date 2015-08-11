@@ -6,7 +6,7 @@ var DB = function () {
     var sales = utils.readFromFile("sales");
     var priceChanges = utils.readFromFile("priceChanges");
     var db = {
-        'prices': function () { return prices; },
+        'prices': function (callback) { return callback('', prices); },
         'sales': function () { return sales; },
         'priceChanges': function () { return priceChanges; },
         'pricesfilter': function (id) {

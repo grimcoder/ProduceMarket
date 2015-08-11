@@ -18,7 +18,7 @@ var DB = (callback) => {
         db.collection('sales').insert(prices, function (err, inserted) {});
         db.collection('priceChanges').insert(prices, function (err, inserted) {});
 
-        callback();
+        //callback();
 
     });
 };

@@ -1,8 +1,11 @@
 ///<reference path="definitions/nodejs.d.ts" />
+var PriceModel = require('./models.ts').PriceModel;
 var DB = function () {
     var db = {
-        'prices': function () {
-            return [];
+        'prices': function (callback) {
+            var mongoose = require('mongoose');
+            mongoose.connect('mongodb://localhost/ProduceMarket');
+            PriceModel.find().exec(callback);
         }
     };
     return db;

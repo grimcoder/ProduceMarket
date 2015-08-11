@@ -10,7 +10,7 @@ if (initMongo) {
 }
 //if running script with -m switch use Mongo otherwise use file storage
 if (useMongo) {
-    var DB = require('./persistanceMongo')();
+    var DB = require('./persistanceMongo');
 }
 else {
     var DB = require('./persistanceJs');
@@ -28,7 +28,9 @@ app.get('/api/prices', function (req, res) {
         res.json(db.pricesfilter(req.query.id));
     }
     else {
-        res.json(db.prices());
+        db.prices(function (err, result) {
+            return res.json(result);
+        });
     }
 });
 app.post('/api/prices', function (req, res) {

@@ -7,7 +7,7 @@ var DB =  ()=> {
     var sales = utils.readFromFile("sales");
     var priceChanges = utils.readFromFile("priceChanges");
     var db = {
-        'prices': () => prices,
+        'prices': (callback) => callback('', prices),
         'sales': () => sales,
         'priceChanges': () => priceChanges,
         'pricesfilter':  (id)=> {

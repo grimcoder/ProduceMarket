@@ -54,7 +54,7 @@ var PriceModel = mongoose.model('Price', Price);
 var SaleModel = mongoose.model('Sale', Sale);
 var PriceChangeModel = mongoose.model('PriceChange', PriceChange);
 module.exports = {
-    Price: PriceModel,
+    PriceModel: PriceModel,
     SaleModel: SaleModel,
     PriceChangeModel: PriceChangeModel
 };
