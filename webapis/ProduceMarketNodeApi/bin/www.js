@@ -25,7 +25,7 @@ app.use(logger());
 app.use(express.static(path.join(__dirname, '../public')));
 app.get('/api/prices', function (req, res) {
     if (req.query.id) {
-        res.json(db.pricesfilter(req.query.id));
+        db.pricesfilter(req.query.id, function (err, result) { return res.json(result); });
     }
     else {
         db.prices(function (err, result) { return res.json(result); });
@@ -75,7 +75,7 @@ app.get('/api/trucks', function (req, res) {
         res.json(trucks);
     });
 });
-app.listen(3000, function () {
+app.listen(3000, function (err, obj) {
     console.log('Server is running');
 });
 //# sourceMappingURL=www.js.map

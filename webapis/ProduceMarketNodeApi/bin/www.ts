@@ -39,9 +39,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/api/prices', (req, res) => {
     if (req.query.id) {
-        res.json(
-            db.pricesfilter(req.query.id)
-        )
+        db.pricesfilter(req.query.id,(err, result) =>res.json(result))
     }
     else {
         db.prices((err, result) =>res.json(result));
@@ -108,6 +106,6 @@ app.get('/api/trucks', (req, res) => {
 
 });
 
-app.listen(3000, () => {
+app.listen(3000, (err, obj) => {
     console.log('Server is running')
 });

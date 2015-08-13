@@ -10,10 +10,10 @@ var DB =  ()=> {
         'prices': (callback) => callback('', prices),
         'sales': () => sales,
         'priceChanges': () => priceChanges,
-        'pricesfilter':  (id)=> {
-            return prices.filter((i)=> {
+        'pricesfilter':  (id,callback)=> {
+            callback('', prices.filter((i)=> {
                 return i.Id == id;
-            });
+            }));
         },
         'postprice':  (data) =>{
             var Action;

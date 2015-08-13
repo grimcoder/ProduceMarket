@@ -14,9 +14,18 @@ var DB = (callback) => {
     MongoClient.connect('mongodb://127.0.0.1/ProduceMarket', function(err, db) {
 
         if(err) throw err;
-        db.collection('prices').insert(prices, function (err, inserted) {});
-        db.collection('sales').insert(prices, function (err, inserted) {});
-        db.collection('priceChanges').insert(prices, function (err, inserted) {});
+
+        db.collection('prices').remove({}, (err, db)=>{});
+        db.collection('sales').remove({}, (err, db)=>{});
+        db.collection('priceChanges').remove({}, (err, db)=>{});
+
+        db.collection('prices').insert(prices.map((i)=>{delete i.Id; return i;}), function (err, inserted) {});
+
+        db.collection('sales').insert(sales.map((i)=>{delete i.Id; return i;}), function (err, inserted) {});
+
+        db.collection('priceChanges').insert(priceChanges.map((i)=>{delete i.Id; return i;}), function (err, inserted) {});
+
+       //db.close();
 
         //callback();
 

@@ -14,7 +14,7 @@ var Price = new Schema({
     Price : Number
 });
 
-Price.virtual('id').get(function () {
+Price.virtual('Id').get(function () {
     return this._id.toHexString();
 });
 
@@ -38,7 +38,7 @@ var Sale = new Schema({
     }]
 });
 
-Sale.virtual('id').get(function () {
+Sale.virtual('Id').get(function () {
     return this._id.toHexString();
 });
 
@@ -54,7 +54,7 @@ Sale.set('toObject', {
 
 var PriceChange = new Schema({});
 
-PriceChange.virtual('id').get(function () {
+PriceChange.virtual('Id').get(function () {
     return this._id.toHexString();
 });
 

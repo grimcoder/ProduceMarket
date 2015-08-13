@@ -8,7 +8,7 @@ var Price = new Schema({
     ItemName: String,
     Price: Number
 });
-Price.virtual('id').get(function () {
+Price.virtual('Id').get(function () {
     return this._id.toHexString();
 });
 // Ensure virtual fields are serialised.
@@ -27,7 +27,7 @@ var Sale = new Schema({
         "Units": Number
     }]
 });
-Sale.virtual('id').get(function () {
+Sale.virtual('Id').get(function () {
     return this._id.toHexString();
 });
 // Ensure virtual fields are serialised.
@@ -39,7 +39,7 @@ Sale.set('toObject', {
     virtuals: true
 });
 var PriceChange = new Schema({});
-PriceChange.virtual('id').get(function () {
+PriceChange.virtual('Id').get(function () {
     return this._id.toHexString();
 });
 // Ensure virtual fields are serialised.

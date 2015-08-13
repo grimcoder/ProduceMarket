@@ -9,10 +9,10 @@ var DB = function () {
         'prices': function (callback) { return callback('', prices); },
         'sales': function () { return sales; },
         'priceChanges': function () { return priceChanges; },
-        'pricesfilter': function (id) {
-            return prices.filter(function (i) {
+        'pricesfilter': function (id, callback) {
+            callback('', prices.filter(function (i) {
                 return i.Id == id;
-            });
+            }));
         },
         'postprice': function (data) {
             var Action;
