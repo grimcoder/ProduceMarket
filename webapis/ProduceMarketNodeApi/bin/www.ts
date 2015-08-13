@@ -74,10 +74,10 @@ app.post('/api/sales', (req, res) => {
 
 app.get('/api/sales', (req, res) => {
     if (req.query.id) {
-        res.json(db.salesfilter(req.query.id))
+        db.salesfilter(req.query.id,(err, result) =>res.json(result))
     }
     else {
-        res.json(db.sales());
+        db.sales((err, result) =>res.json(result));
     }
 });
 

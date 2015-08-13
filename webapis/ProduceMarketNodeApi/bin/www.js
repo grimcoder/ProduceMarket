@@ -53,10 +53,10 @@ app.post('/api/sales', function (req, res) {
 });
 app.get('/api/sales', function (req, res) {
     if (req.query.id) {
-        res.json(db.salesfilter(req.query.id));
+        db.salesfilter(req.query.id, function (err, result) { return res.json(result); });
     }
     else {
-        res.json(db.sales());
+        db.sales(function (err, result) { return res.json(result); });
     }
 });
 app.get('/api/reports/prices', function (req, res) {
