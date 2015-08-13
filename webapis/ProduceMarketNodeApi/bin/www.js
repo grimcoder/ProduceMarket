@@ -28,9 +28,7 @@ app.get('/api/prices', function (req, res) {
         res.json(db.pricesfilter(req.query.id));
     }
     else {
-        db.prices(function (err, result) {
-            return res.json(result);
-        });
+        db.prices(function (err, result) { return res.json(result); });
     }
 });
 app.post('/api/prices', function (req, res) {

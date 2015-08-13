@@ -5,7 +5,10 @@ var DB = function () {
         'prices': function (callback) {
             var mongoose = require('mongoose');
             mongoose.connect('mongodb://localhost/ProduceMarket');
-            PriceModel.find().exec(callback);
+            PriceModel.find().exec(function (err, sets) {
+                callback(err, sets);
+                mongoose.connection.close();
+            });
         }
     };
     return db;

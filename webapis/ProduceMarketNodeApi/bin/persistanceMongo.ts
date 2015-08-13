@@ -9,10 +9,11 @@ var DB = ()=> {
             var mongoose = require('mongoose');
             mongoose.connect('mongodb://localhost/ProduceMarket');
 
-            PriceModel.find().exec(callback);
-
+            PriceModel.find().exec((err, sets)=>{
+                callback(err, sets);
+                mongoose.connection.close();
+            });
         }
-
     };
 
     return db;
