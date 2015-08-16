@@ -7,7 +7,7 @@ var DB = function () {
     var priceChanges = utils.readFromFile("priceChanges");
     var db = {
         'prices': function (callback) { return callback('', prices); },
-        'sales': function () { return sales; },
+        'sales': function (callback) { return callback('', sales); },
         'priceChanges': function () { return priceChanges; },
         'pricesfilter': function (id, callback) {
             callback('', prices.filter(function (i) {
@@ -76,10 +76,10 @@ var DB = function () {
             sales.push(sale);
             utils.saveToFile(sales, "sales.json");
         },
-        salesfilter: function (id) {
-            return sales.filter(function (i) {
+        salesfilter: function (id, callback) {
+            callback('', sales.filter(function (i) {
                 return i.Id == id;
-            });
+            }));
         }
     };
     return db;
