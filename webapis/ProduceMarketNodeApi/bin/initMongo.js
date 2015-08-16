@@ -30,8 +30,8 @@ var DB = function (callback) {
             return i;
         }), function (err, inserted) {
         });
-        //db.close();
-        //callback();
+        db.close();
+        callback();
     });
 };
 module.exports = DB;

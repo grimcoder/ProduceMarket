@@ -25,9 +25,9 @@ var DB = (callback) => {
 
         db.collection('priceChanges').insert(priceChanges.map((i)=>{delete i.Id; return i;}), function (err, inserted) {});
 
-       //db.close();
+        db.close();
 
-        //callback();
+        callback();
 
     });
 };

@@ -5,6 +5,10 @@
 ///<reference path="definitions/nodejs.d.ts" />
 ///<reference path="definitions/mongoose.d.ts" />
 
+var a = () => {
+    return 1
+};
+
 var mongoose = require('mongoose')
     ,Schema = mongoose.Schema
     ,ObjectId = Schema.ObjectId;
@@ -68,12 +72,17 @@ PriceChange.set('toObject', {
     virtuals: true
 });
 
-var PriceModel = mongoose.model('Price', Price);
-var SaleModel = mongoose.model('Sale', Sale);
-var PriceChangeModel = mongoose.model('PriceChange', PriceChange);
 
 module.exports = {
-    PriceModel: PriceModel,
-    SaleModel: SaleModel,
-    PriceChangeModel: PriceChangeModel
+
+    PriceModel: (mongoose) => {
+        return mongoose.model('Price', Price)
+    },
+    SaleModel: (mongoose)=> {
+        return mongoose.model('Sale', Sale)
+    },
+    PriceChangeModel: (mongoose)=> {
+        return mongoose.model('PriceChange', PriceChange)
+    }
+
 };

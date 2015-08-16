@@ -3,6 +3,9 @@
  */
 ///<reference path="definitions/nodejs.d.ts" />
 ///<reference path="definitions/mongoose.d.ts" />
+var a = function () {
+    return 1;
+};
 var mongoose = require('mongoose'), Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
 var Price = new Schema({
     ItemName: String,
@@ -50,12 +53,15 @@ PriceChange.set('toJSON', {
 PriceChange.set('toObject', {
     virtuals: true
 });
-var PriceModel = mongoose.model('Price', Price);
-var SaleModel = mongoose.model('Sale', Sale);
-var PriceChangeModel = mongoose.model('PriceChange', PriceChange);
 module.exports = {
-    PriceModel: PriceModel,
-    SaleModel: SaleModel,
-    PriceChangeModel: PriceChangeModel
+    PriceModel: function (mongoose) {
+        return mongoose.model('Price', Price);
+    },
+    SaleModel: function (mongoose) {
+        return mongoose.model('Sale', Sale);
+    },
+    PriceChangeModel: function (mongoose) {
+        return mongoose.model('PriceChange', PriceChange);
+    }
 };
 //# sourceMappingURL=models.js.map
