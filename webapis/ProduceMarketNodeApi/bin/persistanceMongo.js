@@ -34,6 +34,14 @@ var DB = function () {
                 callback(err, sets);
                 mongoose.connection.close();
             });
+        },
+        'pricetodelete': function (id, callback) {
+            var mongoose = require('mongoose');
+            mongoose.connect('mongodb://localhost/ProduceMarket');
+            models.PriceModel(mongoose).find({ _id: id }).remove(function (err, sets) {
+                mongoose.connection.close();
+                callback(err, sets);
+            });
         }
     };
     return db;

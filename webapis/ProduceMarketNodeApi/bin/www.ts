@@ -55,8 +55,8 @@ app.post('/api/prices', (req, res) => {
 
 app.delete('/api/prices', (req, res) => {
     var id = req.query.id;
-    db.pricetodelete(id);
-    res.sendStatus(200);
+    db.pricetodelete(id, (err, result) =>res.sendStatus(200));
+
 });
 
 app.delete('/api/sales', (req, res) => {

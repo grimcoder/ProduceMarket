@@ -38,8 +38,7 @@ app.post('/api/prices', function (req, res) {
 });
 app.delete('/api/prices', function (req, res) {
     var id = req.query.id;
-    db.pricetodelete(id);
-    res.sendStatus(200);
+    db.pricetodelete(id, function (err, result) { return res.sendStatus(200); });
 });
 app.delete('/api/sales', function (req, res) {
     var id = req.query.id;

@@ -46,7 +46,7 @@ var DB =  ()=> {
             utils.saveToFile(prices, "prices.json");
             utils.saveToFile(priceChanges, "priceChanges.json");
         },
-        'pricetodelete':  (Id)=> {
+        'pricetodelete': (Id, callback)=> {
             var priceToDelete = prices.filter((i)=> {
                 return Id == i.Id;
             })[0];
@@ -57,6 +57,7 @@ var DB =  ()=> {
             });
             utils.saveToFile(prices, "prices.json");
             utils.saveToFile(priceChanges, "priceChanges.json");
+            callback();
         },
         'salestodelete':  (id)=> {
             sales = sales.filter((i)=> {

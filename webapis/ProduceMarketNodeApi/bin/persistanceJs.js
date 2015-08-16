@@ -43,7 +43,7 @@ var DB = function () {
             utils.saveToFile(prices, "prices.json");
             utils.saveToFile(priceChanges, "priceChanges.json");
         },
-        'pricetodelete': function (Id) {
+        'pricetodelete': function (Id, callback) {
             var priceToDelete = prices.filter(function (i) {
                 return Id == i.Id;
             })[0];
@@ -54,6 +54,7 @@ var DB = function () {
             });
             utils.saveToFile(prices, "prices.json");
             utils.saveToFile(priceChanges, "priceChanges.json");
+            callback();
         },
         'salestodelete': function (id) {
             sales = sales.filter(function (i) {

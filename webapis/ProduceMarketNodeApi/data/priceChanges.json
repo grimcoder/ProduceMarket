@@ -35,5 +35,17 @@
     "Price": "2",
     "Id": 7,
     "Action": "New"
+  },
+  {
+    "Id": 1,
+    "Price": "23",
+    "ItemName": "Potato",
+    "Action": "Delete"
+  },
+  {
+    "ItemName": "Guava",
+    "Price": "6",
+    "Id": 4,
+    "Action": "Delete"
   }
 ]
