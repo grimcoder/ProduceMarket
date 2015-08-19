@@ -30,7 +30,6 @@ else {
 var db = DB();
 var app = express();
 
-
 console.log('Using mongo: ' + useMongo);
 console.log('Init mongo: ' + initMongo);
 
@@ -54,23 +53,16 @@ app.post('/api/prices', (req, res) => {
 
         if (err) {
             res.sendStatus(500);
-            //res.json(err)
         }
-
-
         else {
-            //res.sendStatus(200)
-
             res.json(result)
         }
-
     });
 });
 
 app.delete('/api/prices', (req, res) => {
     var id = req.query.id;
     db.pricetodelete(id, (err, result) =>res.sendStatus(200));
-
 });
 
 app.delete('/api/sales', (req, res) => {
@@ -79,30 +71,37 @@ app.delete('/api/sales', (req, res) => {
     db.salestodelete(id, (err, result)=> {
         if (err) {
             res.sendStatus(500);
-            //res.json(err)
         }
-
         else {
             res.sendStatus(200)
         }
     });
-
 });
 
 app.post('/api/sales', (req, res) => {
 
     var sale = req.body;
-    db.postsale(sale);
-    res.sendStatus(200);
+    db.postsale(sale, (result, err)=> {
+
+        if (err) {
+            res.sendStatus(500);
+        }
+        else {
+            res.json(result)
+        }
+    });
+
 });
 
 app.get('/api/sales', (req, res) => {
+
     if (req.query.id) {
         db.salesfilter(req.query.id,(err, result) =>res.json(result))
     }
     else {
         db.sales((err, result) =>res.json(result));
     }
+
 });
 
 app.get('/api/reports/prices', (req, res) => {

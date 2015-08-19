@@ -61,13 +61,14 @@ var DB =  ()=> {
             utils.saveToFile(priceChanges, "priceChanges.json");
             callback();
         },
-        'salestodelete':  (id)=> {
+        'salestodelete': (id, callback)=> {
             sales = sales.filter((i)=> {
                 return i.Id != id;
             });
             utils.saveToFile(sales, "sales.json");
+            callback()
         },
-        'postsale':  (sale)=> {
+        'postsale': (sale, callback)=> {
             if (!sale.Id) {
                 var maxId = sales.length == 0 ? 1 : sales.map(function (i) {
                     return i.Id;
@@ -81,6 +82,7 @@ var DB =  ()=> {
             });
             sales.push(sale);
             utils.saveToFile(sales, "sales.json");
+            callback()
         },
         salesfilter: (id, callback)=> {
             callback('', sales.filter((i)=> {

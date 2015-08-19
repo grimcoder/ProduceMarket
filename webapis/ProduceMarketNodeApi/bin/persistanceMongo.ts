@@ -5,25 +5,20 @@
 var models = require('./models'),
     utilities = require('./utils'),
     fs = require('fs');
-
 var utils = utilities();
 
 var DB = () => {
-
     var db = {
-
         'prices': (callback) => {
-
             var mongoose = require('mongoose');
-            mongoose.connect('mongodb://localhost/ProduceMarket');
-
-            models.PriceModel(mongoose).find().exec((err, sets) => {
+            var db = mongoose.createConnection('mongodb://localhost/ProduceMarket');
+            models.PriceModel(db).find().exec((err, sets) => {
                 callback(err, sets);
-                mongoose.connection.close();
+                db.close();
             });
         },
-
         'pricesfilter': (id, callback) => {
+
             var mongoose = require('mongoose');
             mongoose.connect('mongodb://localhost/ProduceMarket');
 
@@ -32,29 +27,22 @@ var DB = () => {
                 mongoose.connection.close();
             });
         },
-
         'sales': (callback) => {
-
             var mongoose = require('mongoose');
             mongoose.connect('mongodb://localhost/ProduceMarket');
-
             models.SaleModel(mongoose).find().exec((err, sets)=> {
                 callback(err, sets);
                 mongoose.connection.close();
             });
         },
-
         'salesfilter': (id, callback) => {
-
             var mongoose = require('mongoose');
-            mongoose.connect('mongodb://localhost/ProduceMarket');
-
-            models.SaleModel(mongoose).find({_id: id}).exec((err, sets)=> {
+            var db = mongoose.createConnection('mongodb://localhost/ProduceMarket');
+            models.SaleModel(db).find({_id: id}).exec((err, sets)=> {
                 callback(err, sets);
-                mongoose.connection.close();
+                db.close();
             });
         },
-
         'pricetodelete': (id, callback)=> {
 
             var mongoose = require('mongoose');
@@ -65,8 +53,6 @@ var DB = () => {
                 callback(err, sets);
             });
         },
-
-
         'postprice': (data, callback) => {
 
             var mongoose = require('mongoose');
@@ -85,6 +71,7 @@ var DB = () => {
                     models.PriceModel(mongoose).update({_id: data.Id}, data, {upsert: true}, (err, set) => {
 
                         if (err) callback(undefined, err);
+
                         data.Action = Action;
                         data.priceWas = oldPrice;
 
@@ -99,7 +86,6 @@ var DB = () => {
                         newPriceChangeModel.save((err) => {
                             if (err) callback(undefined, err);
                             callback("succesfully saved");
-
                             mongoose.connection.close();
 
                         });
@@ -113,33 +99,46 @@ var DB = () => {
                 var newPriceChangeModel = new models.PriceChangeModel(mongoose)(data);
 
                 newPrice.save((err) => {
-
                     if (err) callback(undefined, err);
                     data.Action = Action;
-//                      data.priceWas = oldPrice;
                     newPriceChangeModel.save((err) => {
                         if (err) callback(undefined, err);
                         callback("succesfully saved");
-
                         mongoose.connection.close();
-
                     });
-
                 });
             }
         },
-
         'salestodelete': (id, callback)=> {
-
             var mongoose = require('mongoose');
             mongoose.connect('mongodb://localhost/ProduceMarket');
             models.SaleModel(mongoose).find({_id: id}).remove((err, sets)=> {
                 mongoose.connection.close();
                 callback(err, sets);
             });
+        },
+        'postsale': (data, callback)=> {
+            var mongoose = require('mongoose');
+            mongoose.connect('mongodb://localhost/ProduceMarket');
+            if (data.Id) {
+                models.SaleModel(mongoose).findOne({_id: data.Id}, (err, set) => {
+                    models.SaleModel(mongoose).update({_id: data.Id}, data, {upsert: true}, (err, set) => {
+                        if (err) callback(undefined, err);
+                        callback("Sale succesfully saved");
+                        mongoose.connection.close();
+                    });
+                })
+            }
+            else {
+                var newPrice = new models.SaleModel(mongoose)(data);
+                newPrice.save((err) => {
+                    if (err) callback(undefined, err);
+                    mongoose.connection.close();
+                    callback("Sale succesfully created");
+                });
+            }
         }
     };
-
     return db;
 };
 module.exports = DB;

@@ -38,7 +38,6 @@ app.post('/api/prices', function (req, res) {
             res.sendStatus(500);
         }
         else {
-            //res.sendStatus(200)
             res.json(result);
         }
     });
@@ -60,8 +59,14 @@ app.delete('/api/sales', function (req, res) {
 });
 app.post('/api/sales', function (req, res) {
     var sale = req.body;
-    db.postsale(sale);
-    res.sendStatus(200);
+    db.postsale(sale, function (result, err) {
+        if (err) {
+            res.sendStatus(500);
+        }
+        else {
+            res.json(result);
+        }
+    });
 });
 app.get('/api/sales', function (req, res) {
     if (req.query.id) {

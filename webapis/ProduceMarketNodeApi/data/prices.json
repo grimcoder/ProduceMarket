@@ -23,10 +23,5 @@
     "ItemName": "Eggplant",
     "Price": "2.4",
     "Id": 10
-  },
-  {
-    "ItemName": "Oranges",
-    "Price": "2",
-    "Id": 11
   }
 ]

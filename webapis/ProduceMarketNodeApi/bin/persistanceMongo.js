@@ -7,10 +7,10 @@ var DB = function () {
     var db = {
         'prices': function (callback) {
             var mongoose = require('mongoose');
-            mongoose.connect('mongodb://localhost/ProduceMarket');
-            models.PriceModel(mongoose).find().exec(function (err, sets) {
+            var db = mongoose.createConnection('mongodb://localhost/ProduceMarket');
+            models.PriceModel(db).find().exec(function (err, sets) {
                 callback(err, sets);
-                mongoose.connection.close();
+                db.close();
             });
         },
         'pricesfilter': function (id, callback) {
@@ -31,10 +31,10 @@ var DB = function () {
         },
         'salesfilter': function (id, callback) {
             var mongoose = require('mongoose');
-            mongoose.connect('mongodb://localhost/ProduceMarket');
-            models.SaleModel(mongoose).find({ _id: id }).exec(function (err, sets) {
+            var db = mongoose.createConnection('mongodb://localhost/ProduceMarket');
+            models.SaleModel(db).find({ _id: id }).exec(function (err, sets) {
                 callback(err, sets);
-                mongoose.connection.close();
+                db.close();
             });
         },
         'pricetodelete': function (id, callback) {
@@ -52,9 +52,9 @@ var DB = function () {
             var priceWas;
             if (data.Id) {
                 Action = "Edit";
-                models.PriceModel(mongoose).findOne({_id: data.Id}, function (err, set) {
+                models.PriceModel(mongoose).findOne({ _id: data.Id }, function (err, set) {
                     var oldPrice = set.Price;
-                    models.PriceModel(mongoose).update({_id: data.Id}, data, {upsert: true}, function (err, set) {
+                    models.PriceModel(mongoose).update({ _id: data.Id }, data, { upsert: true }, function (err, set) {
                         if (err)
                             callback(undefined, err);
                         data.Action = Action;
@@ -82,7 +82,6 @@ var DB = function () {
                     if (err)
                         callback(undefined, err);
                     data.Action = Action;
-                    //                      data.priceWas = oldPrice;
                     newPriceChangeModel.save(function (err) {
                         if (err)
                             callback(undefined, err);
@@ -95,10 +94,33 @@ var DB = function () {
         'salestodelete': function (id, callback) {
             var mongoose = require('mongoose');
             mongoose.connect('mongodb://localhost/ProduceMarket');
-            models.SaleModel(mongoose).find({_id: id}).remove(function (err, sets) {
+            models.SaleModel(mongoose).find({ _id: id }).remove(function (err, sets) {
                 mongoose.connection.close();
                 callback(err, sets);
             });
+        },
+        'postsale': function (data, callback) {
+            var mongoose = require('mongoose');
+            mongoose.connect('mongodb://localhost/ProduceMarket');
+            if (data.Id) {
+                models.SaleModel(mongoose).findOne({ _id: data.Id }, function (err, set) {
+                    models.SaleModel(mongoose).update({ _id: data.Id }, data, { upsert: true }, function (err, set) {
+                        if (err)
+                            callback(undefined, err);
+                        callback("Sale succesfully saved");
+                        mongoose.connection.close();
+                    });
+                });
+            }
+            else {
+                var newPrice = new models.SaleModel(mongoose)(data);
+                newPrice.save(function (err) {
+                    if (err)
+                        callback(undefined, err);
+                    mongoose.connection.close();
+                    callback("Sale succesfully created");
+                });
+            }
         }
     };
     return db;

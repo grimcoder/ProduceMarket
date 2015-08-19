@@ -66,12 +66,10 @@ var PriceChange = new Schema({
 PriceChange.virtual('Id').get(function () {
     return this._id.toHexString();
 });
-
 // Ensure virtual fields are serialised.
 PriceChange.set('toJSON', {
     virtuals: true
 });
-
 // Ensure virtual fields are serialised.
 PriceChange.set('toObject', {
     virtuals: true
@@ -79,7 +77,6 @@ PriceChange.set('toObject', {
 
 
 module.exports = {
-
     PriceModel: (mongoose) => {
         return mongoose.model('Price', Price)
     },
@@ -89,5 +86,4 @@ module.exports = {
     PriceChangeModel: (mongoose)=> {
         return mongoose.model('PriceChange', PriceChange)
     }
-
 };

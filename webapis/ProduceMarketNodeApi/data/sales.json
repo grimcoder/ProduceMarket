@@ -25,16 +25,5 @@
       }
     ],
     "Id": 4
-  },
-  {
-    "Date": "2015-08-11T06:18:37.649Z",
-    "SaleDetails": [
-      {
-        "ItemName": "Potato",
-        "Price": "23",
-        "Units": "1"
-      }
-    ],
-    "Id": 5
   }
 ]
