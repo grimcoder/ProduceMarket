@@ -33,8 +33,15 @@ app.get('/api/prices', function (req, res) {
 });
 app.post('/api/prices', function (req, res) {
     var data = req.body;
-    db.postprice(data);
-    res.sendStatus(200);
+    db.postprice(data, function (result, err) {
+        if (err) {
+            res.sendStatus(500);
+        }
+        else {
+            //res.sendStatus(200)
+            res.json(result);
+        }
+    });
 });
 app.delete('/api/prices', function (req, res) {
     var id = req.query.id;
@@ -42,8 +49,14 @@ app.delete('/api/prices', function (req, res) {
 });
 app.delete('/api/sales', function (req, res) {
     var id = req.query.id;
-    db.salestodelete(id);
-    res.sendStatus(200);
+    db.salestodelete(id, function (err, result) {
+        if (err) {
+            res.sendStatus(500);
+        }
+        else {
+            res.sendStatus(200);
+        }
+    });
 });
 app.post('/api/sales', function (req, res) {
     var sale = req.body;

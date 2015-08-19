@@ -14,7 +14,7 @@ var DB = function () {
                 return i.Id == id;
             }));
         },
-        'postprice': function (data) {
+        'postprice': function (data, callback) {
             var Action;
             var priceWas;
             if (data.Id) {
@@ -42,6 +42,7 @@ var DB = function () {
             dataChanged.priceWas = priceWas;
             utils.saveToFile(prices, "prices.json");
             utils.saveToFile(priceChanges, "priceChanges.json");
+            callback(data + " saved");
         },
         'pricetodelete': function (Id, callback) {
             var priceToDelete = prices.filter(function (i) {

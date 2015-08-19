@@ -18,6 +18,7 @@ var express = require('express'),
 if (initMongo) {
     require('./initMongo')(process.exit)
 }
+
 //if running script with -m switch use Mongo otherwise use file storage
 if (useMongo) {
     var DB = require('./persistanceMongo');
@@ -49,8 +50,21 @@ app.get('/api/prices', (req, res) => {
 
 app.post('/api/prices', (req, res) => {
     var data = req.body;
-    db.postprice(data);
-    res.sendStatus(200);
+    db.postprice(data, (result, err)=> {
+
+        if (err) {
+            res.sendStatus(500);
+            //res.json(err)
+        }
+
+
+        else {
+            //res.sendStatus(200)
+
+            res.json(result)
+        }
+
+    });
 });
 
 app.delete('/api/prices', (req, res) => {
@@ -62,8 +76,17 @@ app.delete('/api/prices', (req, res) => {
 app.delete('/api/sales', (req, res) => {
 
     var id = req.query.id;
-    db.salestodelete(id);
-    res.sendStatus(200);
+    db.salestodelete(id, (err, result)=> {
+        if (err) {
+            res.sendStatus(500);
+            //res.json(err)
+        }
+
+        else {
+            res.sendStatus(200)
+        }
+    });
+
 });
 
 app.post('/api/sales', (req, res) => {
@@ -94,8 +117,6 @@ app.get('/api/trucks', (req, res) => {
 
     var carSchema = new Schema({make : String,Color: String,model: String});
 
-
-
     var Truck = mongoose.model('Truck', carSchema);
     var trucks;
 
@@ -104,7 +125,6 @@ app.get('/api/trucks', (req, res) => {
         console.log(trucks);
         res.json(trucks);
     })
-
 });
 
 app.listen(3000, (err, obj) => {

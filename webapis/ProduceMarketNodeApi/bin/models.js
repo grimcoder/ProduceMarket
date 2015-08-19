@@ -41,7 +41,12 @@ Sale.set('toJSON', {
 Sale.set('toObject', {
     virtuals: true
 });
-var PriceChange = new Schema({});
+var PriceChange = new Schema({
+    "Price": Number,
+    "ItemName": String,
+    "Action": String,
+    "priceWas": Number
+});
 PriceChange.virtual('Id').get(function () {
     return this._id.toHexString();
 });
