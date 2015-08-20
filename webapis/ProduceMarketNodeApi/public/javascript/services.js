@@ -1,20 +1,21 @@
+var apiHost = 'http://localhost:3000';
 angular.module('produceMarketApp.services', []).factory('$Prices', function ($http) {
 
     var serviceInstance = {
 
         counter: 0,
         getPrices: function () {
-            return $http.get('/api/prices');
+            return $http.get(apiHost + '/api/prices');
         },
         deletePrice: function (id) {
-            return $http.delete('/api/prices?id=' + id);
+            return $http.delete(apiHost + '/api/prices?id=' + id);
         },
         get: function (id) {
-            return $http.get('/api/prices/?id=' + id)
+            return $http.get(apiHost + '/api/prices/?id=' + id)
 
         },
         post: function (price) {
-            return $http.post('/api/prices', price);
+            return $http.post(apiHost + '/api/prices', price);
         }
     };
     return serviceInstance;
@@ -22,7 +23,7 @@ angular.module('produceMarketApp.services', []).factory('$Prices', function ($ht
 }).factory('$Reports', function ($http) {
     var serviceInstance = {
         getPricesReport: function () {
-            return $http.get('/api/reports/prices');
+            return $http.get(apiHost + '/api/reports/prices');
         }
     };
     return serviceInstance;
@@ -45,16 +46,16 @@ angular.module('produceMarketApp.services', []).factory('$Prices', function ($ht
                 });
         },
         getSales: function () {
-            return $http.get('/api/sales');
+            return $http.get(apiHost + '/api/sales');
         },
         deleteSale: function (id) {
-            return $http.delete('/api/sales?id=' + id);
+            return $http.delete(apiHost + '/api/sales?id=' + id);
         },
         updateSale: function (sale) {
-            return $http.post('/api/sales', sale);
+            return $http.post(apiHost + '/api/sales', sale);
         },
         get: function (id) {
-            return $http.get('/api/sales/?id=' + id)
+            return $http.get(apiHost + '/api/sales/?id=' + id)
 
         }
 
