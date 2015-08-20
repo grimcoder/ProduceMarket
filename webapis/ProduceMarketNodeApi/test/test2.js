@@ -6,27 +6,24 @@ var expect = require('expect.js');
 /**
  * Globals
  */
-
 var expect = chai.expect;
-var a:number = 2;
-var b:number = 4;
-var c:string = 'hi there';
+var a = 2;
+var b = 4;
+var c = 'hi there';
 var sum = b + c;
-
 /**
  * Unit tests
  */
-describe('User Model Unit Tests:', () => {
-
-    describe('2 + 4', () => {
-        it('should be 6', (done) => {
+describe('User Model Unit Tests:', function () {
+    describe('2 + 4', function () {
+        it('should be 6', function (done) {
             expect(a + b).to.equals(6);
             done();
         });
-
-        it('should not be 7', (done) => {
+        it('should not be 7', function (done) {
             expect(2 + 4).to.not.equals(7);
             done();
         });
     });
 });
+//# sourceMappingURL=test2.js.map
