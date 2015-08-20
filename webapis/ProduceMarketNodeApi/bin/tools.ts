@@ -15,6 +15,7 @@ var express = require('express'),
     utils = require('./utils')();
 
 //when run with -i switch init mongo db and exit
+
 if (initMongo) {
     require('./initMongo')(process.exit)
 }
