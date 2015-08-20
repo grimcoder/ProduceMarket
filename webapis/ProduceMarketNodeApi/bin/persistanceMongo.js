@@ -65,10 +65,10 @@ var DB = function () {
                             Action: data.Action,
                             priceWas: data.priceWas
                         });
-                        newPriceChangeModel.save(function (err) {
+                        newPriceChangeModel.save(function (err, set) {
                             if (err)
                                 callback(undefined, err);
-                            callback("succesfully saved");
+                            callback(set);
                             mongoose.connection.close();
                         });
                     });
@@ -76,16 +76,16 @@ var DB = function () {
             }
             else {
                 Action = "New";
+                data.Action = Action;
                 var newPrice = new models.PriceModel(mongoose)(data);
                 var newPriceChangeModel = new models.PriceChangeModel(mongoose)(data);
                 newPrice.save(function (err) {
                     if (err)
                         callback(undefined, err);
-                    data.Action = Action;
-                    newPriceChangeModel.save(function (err) {
+                    newPriceChangeModel.save(function (err, set) {
                         if (err)
                             callback(undefined, err);
-                        callback("succesfully saved");
+                        callback(set);
                         mongoose.connection.close();
                     });
                 });
@@ -107,20 +107,28 @@ var DB = function () {
                     models.SaleModel(mongoose).update({ _id: data.Id }, data, { upsert: true }, function (err, set) {
                         if (err)
                             callback(undefined, err);
-                        callback("Sale succesfully saved");
+                        callback(set);
                         mongoose.connection.close();
                     });
                 });
             }
             else {
                 var newPrice = new models.SaleModel(mongoose)(data);
-                newPrice.save(function (err) {
+                newPrice.save(function (err, set) {
                     if (err)
                         callback(undefined, err);
                     mongoose.connection.close();
-                    callback("Sale succesfully created");
+                    callback(set);
                 });
             }
+        },
+        'priceChanges': function (callback) {
+            var mongoose = require('mongoose');
+            var db = mongoose.createConnection('mongodb://localhost/ProduceMarket');
+            models.PriceChangeModel(db).find().exec(function (err, sets) {
+                callback(sets);
+                db.close();
+            });
         }
     };
     return db;

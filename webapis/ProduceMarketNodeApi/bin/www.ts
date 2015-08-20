@@ -105,7 +105,9 @@ app.get('/api/sales', (req, res) => {
 });
 
 app.get('/api/reports/prices', (req, res) => {
-    res.json(db.priceChanges());
+    db.priceChanges((data)=> {
+        res.json(data)
+    });
 });
 
 app.get('/api/trucks', (req, res) => {

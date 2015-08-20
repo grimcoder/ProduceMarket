@@ -77,7 +77,9 @@ app.get('/api/sales', function (req, res) {
     }
 });
 app.get('/api/reports/prices', function (req, res) {
-    res.json(db.priceChanges());
+    db.priceChanges(function (data) {
+        res.json(data);
+    });
 });
 app.get('/api/trucks', function (req, res) {
     var mongoose = require('mongoose');

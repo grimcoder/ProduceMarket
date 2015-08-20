@@ -9,7 +9,7 @@ var DB =  ()=> {
     var db = {
         'prices': (callback) => callback('', prices),
         'sales': (callback) => callback('', sales),
-        'priceChanges': () => priceChanges,
+        'priceChanges': (callback) => callback(priceChanges),
         'pricesfilter':  (id,callback)=> {
             callback('', prices.filter((i)=> {
                 return i.Id == id;

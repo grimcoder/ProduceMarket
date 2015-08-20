@@ -8,7 +8,9 @@ var DB = function () {
     var db = {
         'prices': function (callback) { return callback('', prices); },
         'sales': function (callback) { return callback('', sales); },
-        'priceChanges': function () { return priceChanges; },
+        'priceChanges': function (callback) {
+            return callback(priceChanges);
+        },
         'pricesfilter': function (id, callback) {
             callback('', prices.filter(function (i) {
                 return i.Id == id;

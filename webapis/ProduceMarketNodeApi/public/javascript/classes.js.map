@@ -1,0 +1,14 @@
+{
+  "version": 3,
+  "file": "classes.js",
+  "sourceRoot": "",
+  "sources": [
+    "classes.ts"
+  ],
+  "names": [
+    "ProduceMarket",
+    "ProduceMarket.Price",
+    "ProduceMarket.Price.constructor"
+  ],
+  "mappings": "AAGA,AAHA;;GAEG;AACH,IAAO,aAAa,CAanB;AAbD,WAAO,aAAa,EAAC,CAAC;IAClBA,IAAaA,KAAKA;QAKdC,SALSA,KAAKA,CAKFA,EAASA,EAAEA,KAAYA,EAAEA,QAAeA;YAChDC,IAAIA,CAACA,EAAEA,GAAGA,EAAEA,CAACA;YACbA,IAAIA,CAACA,QAAQA,GAAGA,QAAQA,CAACA;YACzBA,IAAIA,CAACA,KAAKA,GAAGA,KAAKA,CAAAA;QACtBA,CAACA;QACLD,YAACA;IAADA,CAACA,AAVDD,IAUCA;IAVYA,mBAAKA,GAALA,KAUZA,CAAAA;AAELA,CAACA,EAbM,aAAa,KAAb,aAAa,QAanB"
+}
