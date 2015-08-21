@@ -12,7 +12,7 @@ angular.module('produceMarketApp.services', []).factory('$Prices', function ($ht
             return $http.delete(apiHost + '/api/prices?id=' + id)
         },
         get: function (id) {
-            return $http.get(apiHost + '/api/prices/?id=' + id)
+            return $http.get(apiHost + '/api/prices?id=' + id)
 
         },
         post: function (price) {
@@ -56,7 +56,7 @@ angular.module('produceMarketApp.services', []).factory('$Prices', function ($ht
             return $http.post(apiHost + '/api/sales', sale)
         },
         get: function (id) {
-            return $http.get(apiHost + '/api/sales/?id=' + id)
+            return $http.get(apiHost + '/api/sales?id=' + id)
 
         }
 
