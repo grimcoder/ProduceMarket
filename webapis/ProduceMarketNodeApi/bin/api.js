@@ -2,7 +2,12 @@
  * Created by taraskovtun on 7/16/15.
  */
 ///<reference path="definitions/nodejs.d.ts" />
-var express = require('express'), bodyParser = require('body-parser'), logger = require('morgan'), argv = require('optimist').argv, useMongo = argv.m ? true : false, path = require('path'), utils = require('./utils')();
+//imports
+var express = require('express'), bodyParser = require('body-parser'), logger = require('morgan'), argv = require('optimist').argv, useMongo = argv.m ? true : false, initMongo = argv.i ? true : false, path = require('path'), utils = require('./utils')();
+//when run with -i switch init mongo db and exit
+if (initMongo) {
+    require('./initMongo')(process.exit);
+}
 //if running script with -m switch use Mongo otherwise use file storage
 if (useMongo) {
     var DB = require('./persistanceMongo');
@@ -13,10 +18,10 @@ else {
 var db = DB();
 var app = express();
 console.log('Using mongo: ' + useMongo);
+console.log('Init mongo: ' + initMongo);
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(logger());
-//allow CORS
 app.all('/*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -80,20 +85,7 @@ app.get('/api/reports/prices', function (req, res) {
         res.json(data);
     });
 });
-app.get('/api/trucks', function (req, res) {
-    var mongoose = require('mongoose');
-    mongoose.connect('mongodb://localhost/test');
-    var Schema = mongoose.Schema;
-    var carSchema = new Schema({ make: String, Color: String, model: String });
-    var Truck = mongoose.model('Truck', carSchema);
-    var trucks;
-    var query = Truck.find(function (err, trks) {
-        trucks = trks;
-        console.log(trucks);
-        res.json(trucks);
-    });
-});
-app.listen(3000, function (err, obj) {
-    console.log('api is running');
+app.listen(3001, function (err, obj) {
+    console.log('API is running on port 3001');
 });
 //# sourceMappingURL=api.js.map

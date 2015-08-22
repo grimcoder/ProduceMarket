@@ -3,19 +3,14 @@
  */
 
 ///<reference path="definitions/nodejs.d.ts" />
-//imports
 
 var express = require('express'),
-    bodyParser = require('body-parser'),
-    logger = require('morgan'),
-    path = require('path'),
-    utils = require('./utils')();
-
+    path = require('path')
 
 var app = express();
 
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.listen(5000, (err, obj) => {
-    console.log('www static is running')
+app.listen(3000, (err, obj) => {
+    console.log('Server is running at http://127.0.0.1:3000/')
 });

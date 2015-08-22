@@ -1,5 +1,5 @@
 /**
- * Created by taraskovtun on 8/20/15.
+ * Created by taraskovtun on 7/16/15.
  */
 
 ///<reference path="definitions/nodejs.d.ts" />
@@ -15,6 +15,7 @@ var express = require('express'),
     utils = require('./utils')();
 
 //when run with -i switch init mongo db and exit
+
 if (initMongo) {
     require('./initMongo')(process.exit)
 }
