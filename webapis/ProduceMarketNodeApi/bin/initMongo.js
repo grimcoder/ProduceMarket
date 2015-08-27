@@ -13,7 +13,7 @@ var DB = function (callback) {
         });
         db.collection('sales').remove({}, function (err, db) {
         });
-        db.collection('priceChanges').remove({}, function (err, db) {
+        db.collection('pricechanges').remove({}, function (err, db) {
         });
         db.collection('prices').insert(prices.map(function (i) {
             delete i.Id;
@@ -25,7 +25,7 @@ var DB = function (callback) {
             return i;
         }), function (err, inserted) {
         });
-        db.collection('priceChanges').insert(priceChanges.map(function (i) {
+        db.collection('pricechanges').insert(priceChanges.map(function (i) {
             delete i.Id;
             return i;
         }), function (err, inserted) {

@@ -17,13 +17,13 @@ var DB = (callback) => {
 
         db.collection('prices').remove({}, (err, db)=>{});
         db.collection('sales').remove({}, (err, db)=>{});
-        db.collection('priceChanges').remove({}, (err, db)=>{});
+        db.collection('pricechanges').remove({}, (err, db)=>{});
 
         db.collection('prices').insert(prices.map((i)=>{delete i.Id; return i;}), function (err, inserted) {});
 
         db.collection('sales').insert(sales.map((i)=>{delete i.Id; return i;}), function (err, inserted) {});
 
-        db.collection('priceChanges').insert(priceChanges.map((i)=>{delete i.Id; return i;}), function (err, inserted) {});
+        db.collection('pricechanges').insert(priceChanges.map((i)=>{delete i.Id; return i;}), function (err, inserted) {});
 
         db.close();
 
