@@ -22,9 +22,14 @@ console.log('Init mongo: ' + initMongo);
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(logger());
-app.all('/*', function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+app.use(function (req, res, next) {
+    if (req.headers.origin) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Authorization');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE');
+        if (req.method === 'OPTIONS')
+            return res.send(200);
+    }
     next();
 });
 app.get('/api/prices', function (req, res) {
