@@ -24,7 +24,7 @@
 <div class="rTableRow" >
 
     <div class="rTableCell">Amount</div>
-    <div class="rTableCell wide"><span  type="text">{{priceSum(sale)}}</span></div>
+    <div class="rTableCell wide"><span  type="number">{{priceSum(sale)}}</span></div>
 
 
 </div>
@@ -59,12 +59,12 @@
         <div  ng-show="s.Price" class="rTableCell">{{s.Price}}</div>
 
         <div  ng-show="!s.Price" class="rTableCell">
-            <input ng-model-options="{ updateOn: 'blur'}"  ng-model="s.Price" />
+            <input ng-model-options="{ updateOn: 'blur'}" type="number" ng-model="s.Price" />
         </div>
 
         <div  ng-show="s.Units" class="rTableCell">{{s.Units}}</div>
         <div  ng-show="!s.Units" class="rTableCell">
-            <input ng-model="s.Units" ng-model-options="{ updateOn: 'blur'}"  ></div>
+            <input type="number" ng-model="s.Units" ng-model-options="{ updateOn: 'blur'}"  ></div>
 
         <div class="rTableCell narrow">
             <button ng-click="removeSaleDetail(s)">-</button>
