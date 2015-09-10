@@ -1,1 +1,9 @@
-[{"ItemName":"Eggplant","Price":"2.42","Id":10,"Action":"Edit","priceWas":"2.4"}]
+[
+  {
+    "ItemName": "Eggplant",
+    "Price": 2.42,
+    "Id": 10,
+    "Action": "Edit",
+    "priceWas": 2.4
+  }
+]

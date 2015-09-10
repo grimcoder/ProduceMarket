@@ -9,7 +9,6 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
     argv = require('optimist').argv,
-    useMongo = argv.m ? true : false,
     initMongo = argv.i ? true : false,
     path = require('path'),
     utils = require('./utils')();
