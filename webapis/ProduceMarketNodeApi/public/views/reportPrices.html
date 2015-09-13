@@ -1,65 +1,38 @@
-<style>
-    div.cell {
-    'border: 1px solid #999999; float : left;
-        height: 17px;
-        overflow: hidden;
-        padding: 12px 1.8%;
-        width: 40%;
-    }
-
-    div.cellright {
-    'border: 1px solid #999999; float : left;
-        height: 17px;
-        overflow: hidden;
-        padding: 12px 1.8%;
-        width: 40%;
-    }
-</style>
 
 <div>
 
-    <div class="cell" style="font-size: 12pt; font-weight: bold;">
+    <h4 >
         Prices history.
-    </div>
-
-    <div class="cellright">
+        <small>
         Search:
-        <input ng-model="searchkey"/>
-    </div>
+            <input ng-model="searchkey"  placeholder="Item name"/>
+
+    </small>
+    </h4>
+
+
 </div>
 
-<div class="rTable">
+<table class="table">
 
-    <div class="rTableRow">
-        <div class="rTableHead"><strong>Id</strong></div>
-        <div class="rTableHead"><span style="font-weight: bold;">Name</span></div>
-        <div class="rTableHead">Price</div>
-        <div class="rTableHead">Price was</div>
-        <div class="rTableHead">Action</div>
-    </div>
+    <tr>
+        <td><strong>Id</strong></td>
+        <td><strong>Name</strong></td>
+        <td><strong>Price</strong></td>
+        <td><strong>Price was</strong></td>
+        <td><strong>Action</strong></td>
+    </tr>
 
-    <div class="rTableRow" ng-repeat="p in prices | filter: searchkey">
+    <tr class="rTableRow" ng-repeat="p in prices | filter: searchkey">
 
-        <div class="rTableCell">{{p.Id}}</div>
-        <div class="rTableCell">{{p.ItemName}}</div>
-        <div class="rTableCell">{{p.Price}}</div>
-        <div class="rTableCell">{{p.priceWas}}</div>
-        <div class="rTableCell">{{p.Action}}</div>
+        <td>{{p.Id}}</td>
+        <td>{{p.ItemName}}</td>
+        <td>{{p.Price}}</td>
+        <td>{{p.priceWas}}</td>
+        <td>{{p.Action}}</td>
 
-        <!--<div class="rTableCell rButtonCell">-->
+    </tr>
 
-        <!--&lt;!&ndash;<a href="#/prices/{{p.Id}}">edit</a>&ndash;&gt;-->
-        <!--<button ng-click="editPrice(p.Id);">edit</button>-->
-
-        <!--</div>-->
-
-        <!--<div class="rTableCell rButtonCell">-->
-        <!--<button ng-click="deletePrice(p.Id);">delete</button>-->
-        <!--</div>-->
-
-
-    </div>
-
-</div>
+</table>
 
 

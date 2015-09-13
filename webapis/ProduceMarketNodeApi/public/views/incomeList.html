@@ -1,33 +1,16 @@
 
-<style>
-    div.cell {
-    'border: 1px solid #999999;
-    float: left;
-        height: 17px;
-        overflow: hidden;
-        padding: 12px 1.8%;
-        width: 40%;
-    }
-
-    div.cellright {
-    'border: 1px solid #999999;
-    float: left;
-        height: 17px;
-        overflow: hidden;
-        padding: 12px 1.8%;
-        width: 40%;}
-</style>
 
 <div>
 
-    <div  class="cell" style="font-size: 12pt; font-weight: bold;">Income
-        <li class="button" ng-click="newIncome()">New</li>
-    </div>
+    <h4 >Income
+        <button class="button" ng-click="newIncome()">New</button>
+        <small>
+            Search:
+            <input ng-model="searchkey" />
+        </div>
+    </h4>
 
-    <div class="cellright">
-        Search:
-        <input ng-model="searchkey" />
-    </div>
+
 
 </div>
 

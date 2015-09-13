@@ -1,51 +1,41 @@
 
+        <h4>
+            Prices List
+            <button class="btn btn-primary" ng-click="newPrice()">New</button>
+            <small>Search:
+            <input   placeholder="Item name" ng-model="searchkey"/></small>
+        </h4>
 
+<table class="table">
 
-<div>
-    <div>
-    <h4>
-        Prices List
-        <button  class="btn btn-primary"  ng-click="newPrice()">New</button>
-        <small>Search:</small>
-        <input ng-model="searchkey" />
-    </h4>
+    <tr>
+        <td class="rTableHead"><strong>Id</strong></td>
+        <td class="rTableHead">Name</td>
+        <td class="rTableHead">Price</td>
+        <td class="rTableHead rButtonCell">Edit</td>
+        <td class="rTableHead rButtonCell">Delete</td>
+    </tr>
 
+    <tr class="rTableRow" ng-repeat="p in prices | filter: searchkey">
 
+        <td class="rTableCell">{{p.Id}}</td>
+        <td class="rTableCell">{{p.ItemName}}</td>
+        <td class="rTableCell">{{p.Price}}</td>
 
-    </div>
-
-</div>
-
-<div class="rTable">
-
-    <div class="rTableRow">
-    <div class="rTableHead"><strong>Id</strong></div>
-    <div class="rTableHead"><span style="font-weight: bold;">Name</span></div>
-    <div class="rTableHead">Price</div>
-    <div class="rTableHead rButtonCell">Edit</div>
-    <div class="rTableHead rButtonCell">Delete</div>
-</div>
-
-    <div class="rTableRow" ng-repeat="p in prices | filter: searchkey">
-
-        <div class="rTableCell">{{p.Id}}</div>
-        <div class="rTableCell">{{p.ItemName}}</div>
-        <div class="rTableCell">{{p.Price}}</div>
-
-        <div class="rTableCell rButtonCell">
+        <td class="rTableCell rButtonCell">
 
             <!--<a href="#/prices/{{p.Id}}">edit</a>-->
-            <button ng-click="editPrice(p.Id);">edit</button>
+            <button  class="btn btn-primary" ng-click="editPrice(p.Id);">edit</button>
 
-        </div>
+        </td>
 
-        <div class="rTableCell rButtonCell">
-            <button ng-click="deletePrice(p.Id);">delete</button>
-        </div>
+        <td class="rTableCell rButtonCell">
+            <button  class="btn btn-primary" ng-click="deletePrice(p.Id);">delete</button>
+        </td>
 
 
-    </div>
+    </tr>
 
-</div>
+</table>
 
 
