@@ -4,23 +4,6 @@ body {
 
 }
 
-input {
-  'font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-
-}
-
-button {
-  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
-
-}
-
-input {width: 80px;
-  height: 14px;}
-
-a {
-  color: #000000;
-}
-
 
 .rTable {
   display: block;
