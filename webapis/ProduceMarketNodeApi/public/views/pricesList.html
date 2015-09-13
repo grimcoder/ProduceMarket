@@ -1,12 +1,14 @@
 <h4>
     Prices List
     <button class="btn btn-primary" ng-click="newPrice()">New</button>
-    <small>Search:
-    <input placeholder="Item name" ng-model="searchkey"/></small>
+    <small  class="text-right">Search:
+    <input placeholder="Item name" ng-model="searchkey"/>
+    </small>
 </h4>
 
 <table class="table table-striped table-bordered table-hover">
     <thead>
+
     <tr>
         <td><strong>Id</strong></td>
         <td>Name</td>
@@ -14,6 +16,7 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
+
 </thead>
 
     <tr ng-repeat="p in prices | filter: searchkey">
@@ -25,7 +28,7 @@
             <button  class="btn btn-primary" ng-click="editPrice(p.Id);">edit</button>
         </td>
 
-        <td class="rTableCell rButtonCell">
+        <td >
             <button  class="btn btn-danger" ng-click="deletePrice(p.Id);">delete</button>
         </td>
     </tr>
