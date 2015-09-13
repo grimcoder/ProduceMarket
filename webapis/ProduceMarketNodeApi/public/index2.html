@@ -1,50 +1,10 @@
-<html>
-<head lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>Produce market</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/bower_components/angular-route/angular-route.js"></script>
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/javascript/app.js"></script>
-    <script src="/javascript/controllers.js"></script>
-    <script src="/javascript/services.js"></script>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
-    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <title></title>
 </head>
-
-<body ng-app="produceMarketApp" ng-init="a=2">
-
-<div  ng-controller="PricesController">
-
-
-    <h2>
-        <!--<button  class="btn btn-primary" style="margin-right: 10px;" onclick="window.history.back();">back</button>-->
-    <span class="label label-default">
-        {{Title}}
-    </span>
-
-    </h2>
-    <div style="float: right">
-        <div id="fbButton">
-            <fb:login-button  scope="public_profile,email"  onlogin="checkLoginState();">
-            </fb:login-button>
-        </div>
-        <img id="status">
-        </img>
-    </div>
-</div>
-
-<div >
-    <ul class="nav nav-pills">
-        <li role="presentation"><a href="#/prices/">Prices</a></li>
-        <li role="presentation"><a href="#/sales/">Sales</a></li>
-        <li role="presentation"><a href="#/reports/prices">Reports</a></li>
-    </ul>
-</div>
-
-    <div ng-view style="margin: 10px;"></div>
-
+<body>
 <div style="width: 200px; height: 100px;">
     <script>
         // This is called with the results from from FB.getLoginStatus().
@@ -118,15 +78,12 @@
         // Here we run a very simple test of the Graph API after login is
         // successful.  See statusChangeCallback() for when this call is made.
         function testAPI() {
-            FB.api(
-                    "/me/picture",
-                    function (response) {
-                        if (response && !response.error) {
-                            document.getElementById("status").setAttribute("src", response.data.url);
-                            document.getElementById("fbButton").style.display = "none";
-                        }
-                    }
-            );
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+                console.log('Successful login for: ' + response.name);
+                document.getElementById('status').innerHTML =
+                        'Thanks for logging in, ' + response.name + '!';
+            });
         }
     </script>
 
@@ -136,7 +93,11 @@
       the FB.login() function when clicked.
     -->
 
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
+
+    <div id="status">
+    </div>
 </div>
 </body>
-
 </html>
