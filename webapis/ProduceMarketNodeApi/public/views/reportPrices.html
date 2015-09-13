@@ -1,11 +1,11 @@
 
 <div>
 
-    <h4 >
+    <h4>
         Prices history.
         <small>
         Search:
-            <input ng-model="searchkey"  placeholder="Item name"/>
+            <input ng-model="searchkey"  placeholder="Item name" />
 
     </small>
     </h4>
@@ -13,8 +13,8 @@
 
 </div>
 
-<table class="table">
-
+<table class="table table-striped table-bordered table-hover">
+<thead>
     <tr>
         <td><strong>Id</strong></td>
         <td><strong>Name</strong></td>
@@ -22,7 +22,7 @@
         <td><strong>Price was</strong></td>
         <td><strong>Action</strong></td>
     </tr>
-
+    </thead>
     <tr class="rTableRow" ng-repeat="p in prices | filter: searchkey">
 
         <td>{{p.Id}}</td>

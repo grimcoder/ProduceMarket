@@ -1,24 +1,20 @@
 <h4>Price detail</h4>
+<table class="table">
 
-<div class="rTableRow">
-    <div class="rTableHead">Id</div>
-    <div class="rTableHead">
-        <div disabled>{{price.Id}}</div>
-</div>
+    <tr>
+        <td>Id</td>
+        <td>
+            <div disabled>{{price.Id}}</div>
+        </td>
+    </tr>
+    <tr>
+        <td>ItemName</td>
+        <td><input ng-model="price.ItemName" type="text"></td>
 
-<div class="rTableRow">
-    <div class="rTableCell">ItemName</div>
-    <div class="rTableCell"><input ng-model="price.ItemName" type="text"></div>
-</div>
-
-<div class="rTableRow">
-    <div class="rTableCell">Price</div>
-    <div class="rTableCell"><input ng-model="price.Price" type="number"></div>
-</div>
-
-<div class="rTableRow">
-    <div class="rTableCell">
-        <button ng-click="save()">Save</button>
-    </div>
-    <div class="rTableCell"></div>
-</div>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td><input ng-model="price.Price" type="number"></td>
+    </tr>
+</table>
+<button  class="btn btn-primary"  ng-click="save()">Save</button>

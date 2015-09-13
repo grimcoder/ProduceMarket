@@ -6,35 +6,32 @@
         </small>
     </h4>
 
-<table class="table">
+<table class="table table-striped table-bordered table-hover">
 
-    <tr>
-    <td ><strong>Id</strong></td>
-    <td ><string>Date</string></td>
-    <td ><string>Sum</string></td>
-    <td >Edit</td>
-    <td >Delete</td>
-</tr>
+    <thead>
+        <tr>
+        <td >Id</td>
+        <td ><string>Date</string></td>
+        <td ><string>Sum</string></td>
+        <td >Edit</td>
+        <td >Delete</td>
+        </tr>
+    </thead>
 
-        <tr  ng-repeat="s in sales | filter: searchkey">
+        <tr ng-repeat="s in sales | filter: searchkey">
+            <td >{{s.Id}}</td>
+            <td  >{{s.Date.toString().substr(0,10)}}</td>
+            <td>{{priceSum(s)}}</td>
 
-        <td >{{s.Id}}</td>
-        <td  >{{s.Date.toString().substr(0,10)}}</td>
-        <td>{{priceSum(s)}}</td>
+            <td>
+             <button class="btn btn-primary" ng-click="editSale(s.Id);">edit</button>
+            </td>
 
-        <td>
+            <td>
+                <button  class="btn btn-danger" ng-click="deleteSale(s.Id);">delete</button>
+            </td>
 
-            <!--<a href="#/prices/{{p.Id}}">edit</a>-->
-            <button   class="btn btn-primary" ng-click="editSale(s.Id);">edit</button>
-
-        </td>
-
-        <td >
-            <button  class="btn btn-primary" ng-click="deleteSale(s.Id);">delete</button>
-        </td>
-
-
-    </tr>
+        </tr>
 
 </table>
 

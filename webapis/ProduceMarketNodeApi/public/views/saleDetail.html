@@ -1,80 +1,69 @@
-<h3>Sale detail</h3>
 
-<style>
-    .wide {width: 300px;}
-    .narrow {width: 30px;}
-
-</style>
-
-<div class="rTableRow">
-
-    <div class="rTableHead">Id</div>
-    <div class="rTableHead wide">
-        <div disabled >{{sale.Id}}</div>
-
-</div>
-
-<div class="rTableRow" >
+<h3>
+<span class="label label-default">Sale detail</span>
+<small>
+    <button class="btn btn-primary" ng-click="save(sale)">Save</button>
+    <button class="btn btn-warning"  ng-click="addSaleDetail()">+</button>
+</small>
+</h3>
 
 
-    <div class="rTableCell" >Date</div>
-    <div class="rTableCell wide" ><span  type="text">{{sale.Date.toString().substr(0,10)}}</span></div>
+<table class="table">
 
-</div>
-<div class="rTableRow" >
+<tr>
+    <td>Id</td>
+    <td disabled>{{sale.Id}}</td>
+</tr>
 
-    <div class="rTableCell">Amount</div>
-    <div class="rTableCell wide"><span  type="number">{{priceSum(sale)}}</span></div>
-
-
-</div>
-
-
-
-<div class="rTableRow" >
-
-    <div class="rTableCell">
-        <button ng-click="save(sale)">Save</button>
-    </div>
-    <div class="rTableCell wide"></div>
+<tr>
+    <td >Date</td>
+    <td ><span  type="text">{{sale.Date.toString().substr(0,10)}}</span></td>
+</tr>
 
 
-</div>
-    <div style="height: 50px;"></div>
+<tr>
+    <td>Amount</td>
+    <td ><span  type="number">{{priceSum(sale)}}</span></td>
+</tr>
 
-    <div class="rTableRow" class="rTableRow" ng-repeat="s in sale.SaleDetails">
+</table>
 
 
-        <div class="rTableCell" ng-show="!s.ItemName">
-                <select ng-model="s.ItemName" ng-change="updatePrice(s)"
-                        ng-options="item.ItemName as item.ItemName for item in prices">
-                </select>
-        </div>
 
-        <div class="rTableCell" ng-show="s.ItemName">
+<table class="table">
+
+    <tr  ng-repeat="s in sale.SaleDetails">
+
+
+        <td  ng-show="!s.ItemName">
+            <select  class="form-control input-sm" ng-model="s.ItemName" ng-change="updatePrice(s)"
+                    ng-options="item.ItemName as item.ItemName for item in prices">
+            </select>
+        </td>
+
+        <td   ng-show="s.ItemName">
             {{s.ItemName}}
-        </div>
+        </td>
 
+        <td  ng-show="s.Price" >{{s.Price}}</td>
 
-        <div  ng-show="s.Price" class="rTableCell">{{s.Price}}</div>
-
-        <div  ng-show="!s.Price" class="rTableCell">
+        <td  ng-show="!s.Price" >
             <input ng-model-options="{ updateOn: 'blur'}" type="number" ng-model="s.Price" />
-        </div>
+        </td>
 
-        <div  ng-show="s.Units" class="rTableCell">{{s.Units}}</div>
-        <div  ng-show="!s.Units" class="rTableCell">
-            <input type="number" ng-model="s.Units" ng-model-options="{ updateOn: 'blur'}"  ></div>
+        <td  ng-show="s.Units" >{{s.Units}}</td>
+        <td  ng-show="!s.Units" >
+            <input type="number" ng-model="s.Units" ng-model-options="{ updateOn: 'blur'}"  ></td>
 
-        <div class="rTableCell narrow">
-            <button ng-click="removeSaleDetail(s)">-</button>
-        </div>
+        <td >
+            <button class="btn btn-danger" ng-click="removeSaleDetail(s)">-</button>
+        </td>
 
-    </div>
+    </tr>
 
-<div class="rTableRow" style="height: 20px;"></div>
+</table>
 
-    <div class="rTableRow" style="height: 100px;">
-        <button ng-click="addSaleDetail()">+</button>
 
-</div>
+
+
+
