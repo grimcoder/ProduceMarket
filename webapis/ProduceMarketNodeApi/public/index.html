@@ -5,29 +5,34 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Produce market</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/javascript/app.js"></script>
     <script src="/javascript/controllers.js"></script>
     <script src="/javascript/services.js"></script>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+
 </head>
 
 <body ng-app="produceMarketApp" ng-init="a=2">
 <div  ng-controller="PricesController">
-    <button onclick="window.history.back();">back</button>
-    <!--<h2>{{Title}}</h2>-->
-</div>
 
-<div style="height: 5px; border: 1px; background: darkolivegreen"></div>
-<div style="height: 20px; border: 1px; background: none; padding: 5px;">
-
-    <a href="#/prices/">Prices</a>
-    <a href="#/sales/">Sales</a>
-    <a href="#/reports/prices">Reports</a>
+    <button class="btn" onclick="window.history.back();">back</button>
+    <h2>{{Title}}</h2>
 
 </div>
-<div style="height: 5px; border: 1px; background: darkolivegreen"></div>
+
+<div >
+    <ul class="nav nav-pills">
+        <li role="presentation"><a href="#/prices/">Prices</a></li>
+        <li role="presentation"><a href="#/sales/">Sales</a></li>
+        <li role="presentation"><a href="#/reports/prices">Reports</a></li>
+    </ul>
+</div>
+
     <div ng-view></div>
 </body>
 
