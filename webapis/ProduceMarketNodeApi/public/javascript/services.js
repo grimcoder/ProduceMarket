@@ -1,4 +1,4 @@
-var apiHost = "http://127.0.0.1:3001"
+var apiHost = "http://" + window.location.hostname + ":3001"
 
 angular.module('produceMarketApp.services', []).factory('$Prices', function ($http) {
 

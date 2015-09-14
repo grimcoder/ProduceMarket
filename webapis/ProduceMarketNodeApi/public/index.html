@@ -15,24 +15,24 @@
 
 <body ng-app="produceMarketApp" ng-init="a=2">
 
-<div  ng-controller="PricesController">
+<div  ng-controller="PricesController" >
 
 
     <h2>
         <!--<button  class="btn btn-primary" style="margin-right: 10px;" onclick="window.history.back();">back</button>-->
-    <span class="label label-default">
+    <span class="label label-warning" style="float: left">
         {{Title}}
     </span>
-
-    </h2>
-    <div style="float: right">
-        <div id="fbButton">
-            <fb:login-button  scope="public_profile,email"  onlogin="checkLoginState();">
-            </fb:login-button>
+        <div style="float: right">
+            <div id="fbButton">
+                <fb:login-button  scope="public_profile,email"  onlogin="checkLoginState();">
+                </fb:login-button>
+            </div>
+            <img id="status">
+            </img>
         </div>
-        <img id="status">
-        </img>
-    </div>
+    </h2>
+
 </div>
 
 <div >
